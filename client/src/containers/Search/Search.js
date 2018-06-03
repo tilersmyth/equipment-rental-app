@@ -33,6 +33,11 @@ const styles = theme => ({
       borderTop: '1px solid #CCC',
     },
   },
+  [theme.breakpoints.down('xs')]: {
+    card: {
+      marginBottom: 0,
+    },
+  },
 });
 
 const SearchContainer = ({ classes }) => (

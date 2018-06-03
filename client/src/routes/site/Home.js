@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
@@ -7,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import Theme from '../../components/Theme';
 import Header from '../../components/Header';
+import Toolbar from '../../components/Toolbar';
+import Action from '../../components/Toolbar/Action';
+import HeaderText from '../../components/HeaderText';
 import Search from '../../containers/Search';
 import Content from '../../components/Content';
 import Sidebar from '../../components/Sidebar';
@@ -21,8 +25,16 @@ const style = theme => ({
   },
 });
 
-const LoginBtn = ({ margin }) => (
-  <Button fullWidth variant="raised" size="large" color="primary" className={margin || null}>
+const LoginBtn = ({ margin, slug }) => (
+  <Button
+    fullWidth
+    component={Link}
+    to={`${slug}/login`}
+    variant="raised"
+    size="large"
+    color="primary"
+    className={margin || null}
+  >
     Login or Signup
   </Button>
 );
@@ -32,11 +44,16 @@ const Home = ({ classes, slug }) => {
   return (
     <Theme custom={site.custom}>
       <Header custom={site.custom}>
+        <Toolbar>
+          <div />
+          <Action />
+        </Toolbar>
+        <HeaderText text={site.custom.headerText} />
         <Search />
       </Header>
       <Content>
         <Hidden mdUp>
-          <LoginBtn margin={classes.loginBtnSm} />
+          <LoginBtn slug={site.slug.value} margin={classes.loginBtnSm} />
           <CatDrawer>
             <CatList siteId={site.id} />
           </CatDrawer>
@@ -44,7 +61,7 @@ const Home = ({ classes, slug }) => {
         <Grid container justify="center" spacing={24}>
           <Grid item xs={false} md={5} lg={4}>
             <Hidden smDown>
-              <LoginBtn />
+              <LoginBtn slug={site.slug.value} />
               <Sidebar>
                 <CatList siteId={site.id} />
               </Sidebar>

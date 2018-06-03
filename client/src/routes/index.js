@@ -12,7 +12,7 @@ export default () => (
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
       <Route path="/error" exact component={Error} />
-      <Route path="/:siteSlug" exact component={Site} />
+      <Route path="/:siteSlug" component={Site} />
     </Switch>
   </BrowserRouter>
 );

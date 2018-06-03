@@ -1,8 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import Action from './Action';
-
 const styles = theme => ({
   toolbar: {
     width: '100%',
@@ -19,11 +17,6 @@ const styles = theme => ({
   },
 });
 
-const Toolbar = ({ classes }) => (
-  <div className={classes.toolbar}>
-    <div />
-    <Action />
-  </div>
-);
+const Toolbar = ({ classes, children }) => <div className={classes.toolbar}>{children}</div>;
 
 export default withStyles(styles)(Toolbar);

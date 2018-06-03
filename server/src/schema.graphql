@@ -38,6 +38,7 @@ type Company {
 type Site {
   id: ID!
   name: String!
+  slug: Slug!
   category: [Category!]!
   custom: CustomizeSite
 }

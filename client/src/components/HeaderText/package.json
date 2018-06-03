@@ -1,0 +1,6 @@
+{
+  "name": "HeaderText",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./HeaderText.js"
+}
