@@ -15,7 +15,7 @@ const styles = theme => ({
 
 const Action = ({ classes }) => (
   <div className={classes.action}>
-    <Button variant="fab" aria-label="delete" className={classes.button}>
+    <Button variant="fab" aria-label="delete" color="secondary" className={classes.button}>
       <ShoppingCart />
     </Button>
   </div>

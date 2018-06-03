@@ -16,6 +16,7 @@ const Theme = ({ children, custom }) => {
   const theme = createMuiTheme({
     palette: {
       primary: { main: setTheme },
+      secondary: { main: '#FFFFFF' },
     },
   });
 
