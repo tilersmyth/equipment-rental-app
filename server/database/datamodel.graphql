@@ -1,0 +1,112 @@
+type User {
+  id: ID! @unique
+  email: String! @unique
+  password: String!
+  firstName: String!
+  lastName: String!
+  teams: [Team!]!
+}
+
+type Company {
+  id: ID! @unique
+  name: String!
+  slug: Slug!
+  sites: [Site!]!
+}
+
+type Site {
+  id: ID! @unique
+  name: String!
+  location: Location!
+  slug: Slug!
+  company: Company!
+  category: [Category!]!
+  team: [Team!]!
+  custom: CustomizeSite
+}
+
+type Category {
+  id: ID! @unique
+  name: String!
+  description: String!
+  slug: Slug!
+  productType: [ProductType!]!
+  site: Site!
+}
+
+type ProductType {
+  id: ID! @unique
+  name: String!
+  description: String!
+  image: Image
+  slug: Slug!
+  products: [Product!]!
+  category: Category!
+  featured: Boolean! @default(value: "false")
+}
+
+type Product {
+  id: ID! @unique
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+  featuredImage: Image!
+  slug: Slug!
+  gallery: [Gallery!]!
+  pricing: Pricing!
+  type: ProductType!
+}
+
+type Location {
+  id: ID! @unique
+  lat: Float!
+  lng: Float!
+  site: Site
+  address: String!
+}
+
+type Team {
+  id: ID! @unique
+  user: User!
+  site: Site!
+  role: String!
+}
+
+type Pricing {
+  id: ID! @unique
+  product: Product!
+  rangePricing: Boolean!
+  day: Int!
+  week: Int!
+  month: Int!
+}
+
+type Image {
+  url: String!
+}
+
+type Gallery {
+  url: String!
+}
+
+type Slug {
+  id: ID! @unique
+  value: String!
+  company: Company
+  site: Site
+  category: Category
+  productType: ProductType
+  product: Product
+}
+
+type CustomizeSite {
+  id: ID! @unique
+  headerText: String
+  headerImage: String
+  theme: ThemeColor
+}
+
+type ThemeColor {
+  color: String!
+  shade: String!
+}

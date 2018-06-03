@@ -1,0 +1,6 @@
+{
+  "name": "HomeExplore",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Explore.js"
+}

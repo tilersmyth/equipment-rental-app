@@ -1,0 +1,88 @@
+type Query {
+  me: User
+  users: [User!]!
+  site(id: ID!): Site
+  slug(value: String!): Slug
+  allSites: [Site!]!
+  companies: [Company!]!
+  company(id: ID!): Company!
+  cats(id: ID!): [Category!]!
+  allTypes: [ProductType!]!
+  featured(id: ID!): [ProductType!]!
+  teams(id: ID!): [Team!]!
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  sites: [Site!]!
+}
+
+type Site {
+  id: ID!
+  name: String!
+  category: [Category!]!
+  custom: CustomizeSite
+}
+
+type Category {
+  id: ID!
+  name: String!
+  description: String!
+  productType: [ProductType!]!
+}
+
+type ProductType {
+  id: ID!
+  name: String!
+  description: String!
+  image: Image!
+}
+
+type Team {
+  id: ID!
+  user: User!
+  site: Site!
+  role: String!
+}
+
+type Slug {
+  id: ID!
+  value: String!
+  company: Company
+  site: Site
+  category: Category
+  productType: ProductType
+}
+
+type Image {
+  url: String!
+}
+
+type CustomizeSite {
+  headerText: String
+  headerImage: String
+  theme: ThemeColor
+}
+
+type ThemeColor {
+  color: String!
+  shade: String!
+}

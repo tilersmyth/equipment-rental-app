@@ -1,0 +1,4314 @@
+# source: http://localhost:4466/rent/dev
+# timestamp: Fri Jun 01 2018 23:42:02 GMT+0200 (CEST)
+
+type AggregateCategory {
+  count: Int!
+}
+
+type AggregateCompany {
+  count: Int!
+}
+
+type AggregateCustomizeSite {
+  count: Int!
+}
+
+type AggregateGallery {
+  count: Int!
+}
+
+type AggregateImage {
+  count: Int!
+}
+
+type AggregateLocation {
+  count: Int!
+}
+
+type AggregatePricing {
+  count: Int!
+}
+
+type AggregateProduct {
+  count: Int!
+}
+
+type AggregateProductType {
+  count: Int!
+}
+
+type AggregateSite {
+  count: Int!
+}
+
+type AggregateSlug {
+  count: Int!
+}
+
+type AggregateTeam {
+  count: Int!
+}
+
+type AggregateThemeColor {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+type Category implements Node {
+  id: ID!
+  name: String!
+  description: String!
+  slug(where: SlugWhereInput): Slug!
+  productType(where: ProductTypeWhereInput, orderBy: ProductTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProductType!]
+  site(where: SiteWhereInput): Site!
+}
+
+"""A connection to a list of items."""
+type CategoryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CategoryEdge]!
+  aggregate: AggregateCategory!
+}
+
+input CategoryCreateInput {
+  name: String!
+  description: String!
+  slug: SlugCreateOneWithoutCategoryInput!
+  productType: ProductTypeCreateManyWithoutCategoryInput
+  site: SiteCreateOneWithoutCategoryInput!
+}
+
+input CategoryCreateManyWithoutSiteInput {
+  create: [CategoryCreateWithoutSiteInput!]
+  connect: [CategoryWhereUniqueInput!]
+}
+
+input CategoryCreateOneWithoutProductTypeInput {
+  create: CategoryCreateWithoutProductTypeInput
+  connect: CategoryWhereUniqueInput
+}
+
+input CategoryCreateOneWithoutSlugInput {
+  create: CategoryCreateWithoutSlugInput
+  connect: CategoryWhereUniqueInput
+}
+
+input CategoryCreateWithoutProductTypeInput {
+  name: String!
+  description: String!
+  slug: SlugCreateOneWithoutCategoryInput!
+  site: SiteCreateOneWithoutCategoryInput!
+}
+
+input CategoryCreateWithoutSiteInput {
+  name: String!
+  description: String!
+  slug: SlugCreateOneWithoutCategoryInput!
+  productType: ProductTypeCreateManyWithoutCategoryInput
+}
+
+input CategoryCreateWithoutSlugInput {
+  name: String!
+  description: String!
+  productType: ProductTypeCreateManyWithoutCategoryInput
+  site: SiteCreateOneWithoutCategoryInput!
+}
+
+"""An edge in a connection."""
+type CategoryEdge {
+  """The item at the end of the edge."""
+  node: Category!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CategoryOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CategoryPreviousValues {
+  id: ID!
+  name: String!
+  description: String!
+}
+
+type CategorySubscriptionPayload {
+  mutation: MutationType!
+  node: Category
+  updatedFields: [String!]
+  previousValues: CategoryPreviousValues
+}
+
+input CategorySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CategorySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CategorySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategorySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CategoryWhereInput
+}
+
+input CategoryUpdateInput {
+  name: String
+  description: String
+  slug: SlugUpdateOneWithoutCategoryInput
+  productType: ProductTypeUpdateManyWithoutCategoryInput
+  site: SiteUpdateOneWithoutCategoryInput
+}
+
+input CategoryUpdateManyWithoutSiteInput {
+  create: [CategoryCreateWithoutSiteInput!]
+  connect: [CategoryWhereUniqueInput!]
+  disconnect: [CategoryWhereUniqueInput!]
+  delete: [CategoryWhereUniqueInput!]
+  update: [CategoryUpdateWithWhereUniqueWithoutSiteInput!]
+  upsert: [CategoryUpsertWithWhereUniqueWithoutSiteInput!]
+}
+
+input CategoryUpdateOneWithoutProductTypeInput {
+  create: CategoryCreateWithoutProductTypeInput
+  connect: CategoryWhereUniqueInput
+  delete: Boolean
+  update: CategoryUpdateWithoutProductTypeDataInput
+  upsert: CategoryUpsertWithoutProductTypeInput
+}
+
+input CategoryUpdateOneWithoutSlugInput {
+  create: CategoryCreateWithoutSlugInput
+  connect: CategoryWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CategoryUpdateWithoutSlugDataInput
+  upsert: CategoryUpsertWithoutSlugInput
+}
+
+input CategoryUpdateWithoutProductTypeDataInput {
+  name: String
+  description: String
+  slug: SlugUpdateOneWithoutCategoryInput
+  site: SiteUpdateOneWithoutCategoryInput
+}
+
+input CategoryUpdateWithoutSiteDataInput {
+  name: String
+  description: String
+  slug: SlugUpdateOneWithoutCategoryInput
+  productType: ProductTypeUpdateManyWithoutCategoryInput
+}
+
+input CategoryUpdateWithoutSlugDataInput {
+  name: String
+  description: String
+  productType: ProductTypeUpdateManyWithoutCategoryInput
+  site: SiteUpdateOneWithoutCategoryInput
+}
+
+input CategoryUpdateWithWhereUniqueWithoutSiteInput {
+  where: CategoryWhereUniqueInput!
+  data: CategoryUpdateWithoutSiteDataInput!
+}
+
+input CategoryUpsertWithoutProductTypeInput {
+  update: CategoryUpdateWithoutProductTypeDataInput!
+  create: CategoryCreateWithoutProductTypeInput!
+}
+
+input CategoryUpsertWithoutSlugInput {
+  update: CategoryUpdateWithoutSlugDataInput!
+  create: CategoryCreateWithoutSlugInput!
+}
+
+input CategoryUpsertWithWhereUniqueWithoutSiteInput {
+  where: CategoryWhereUniqueInput!
+  update: CategoryUpdateWithoutSiteDataInput!
+  create: CategoryCreateWithoutSiteInput!
+}
+
+input CategoryWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CategoryWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CategoryWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategoryWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  slug: SlugWhereInput
+  productType_every: ProductTypeWhereInput
+  productType_some: ProductTypeWhereInput
+  productType_none: ProductTypeWhereInput
+  site: SiteWhereInput
+}
+
+input CategoryWhereUniqueInput {
+  id: ID
+}
+
+type Company implements Node {
+  id: ID!
+  name: String!
+  slug(where: SlugWhereInput): Slug!
+  sites(where: SiteWhereInput, orderBy: SiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Site!]
+}
+
+"""A connection to a list of items."""
+type CompanyConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CompanyEdge]!
+  aggregate: AggregateCompany!
+}
+
+input CompanyCreateInput {
+  name: String!
+  slug: SlugCreateOneWithoutCompanyInput!
+  sites: SiteCreateManyWithoutCompanyInput
+}
+
+input CompanyCreateOneWithoutSitesInput {
+  create: CompanyCreateWithoutSitesInput
+  connect: CompanyWhereUniqueInput
+}
+
+input CompanyCreateOneWithoutSlugInput {
+  create: CompanyCreateWithoutSlugInput
+  connect: CompanyWhereUniqueInput
+}
+
+input CompanyCreateWithoutSitesInput {
+  name: String!
+  slug: SlugCreateOneWithoutCompanyInput!
+}
+
+input CompanyCreateWithoutSlugInput {
+  name: String!
+  sites: SiteCreateManyWithoutCompanyInput
+}
+
+"""An edge in a connection."""
+type CompanyEdge {
+  """The item at the end of the edge."""
+  node: Company!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CompanyOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CompanyPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type CompanySubscriptionPayload {
+  mutation: MutationType!
+  node: Company
+  updatedFields: [String!]
+  previousValues: CompanyPreviousValues
+}
+
+input CompanySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CompanySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CompanySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CompanySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CompanyWhereInput
+}
+
+input CompanyUpdateInput {
+  name: String
+  slug: SlugUpdateOneWithoutCompanyInput
+  sites: SiteUpdateManyWithoutCompanyInput
+}
+
+input CompanyUpdateOneWithoutSitesInput {
+  create: CompanyCreateWithoutSitesInput
+  connect: CompanyWhereUniqueInput
+  delete: Boolean
+  update: CompanyUpdateWithoutSitesDataInput
+  upsert: CompanyUpsertWithoutSitesInput
+}
+
+input CompanyUpdateOneWithoutSlugInput {
+  create: CompanyCreateWithoutSlugInput
+  connect: CompanyWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CompanyUpdateWithoutSlugDataInput
+  upsert: CompanyUpsertWithoutSlugInput
+}
+
+input CompanyUpdateWithoutSitesDataInput {
+  name: String
+  slug: SlugUpdateOneWithoutCompanyInput
+}
+
+input CompanyUpdateWithoutSlugDataInput {
+  name: String
+  sites: SiteUpdateManyWithoutCompanyInput
+}
+
+input CompanyUpsertWithoutSitesInput {
+  update: CompanyUpdateWithoutSitesDataInput!
+  create: CompanyCreateWithoutSitesInput!
+}
+
+input CompanyUpsertWithoutSlugInput {
+  update: CompanyUpdateWithoutSlugDataInput!
+  create: CompanyCreateWithoutSlugInput!
+}
+
+input CompanyWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CompanyWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CompanyWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CompanyWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  slug: SlugWhereInput
+  sites_every: SiteWhereInput
+  sites_some: SiteWhereInput
+  sites_none: SiteWhereInput
+}
+
+input CompanyWhereUniqueInput {
+  id: ID
+}
+
+type CustomizeSite implements Node {
+  id: ID!
+  headerText: String
+  headerImage: String
+  theme(where: ThemeColorWhereInput): ThemeColor
+}
+
+"""A connection to a list of items."""
+type CustomizeSiteConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CustomizeSiteEdge]!
+  aggregate: AggregateCustomizeSite!
+}
+
+input CustomizeSiteCreateInput {
+  headerText: String
+  headerImage: String
+  theme: ThemeColorCreateOneInput
+}
+
+input CustomizeSiteCreateOneInput {
+  create: CustomizeSiteCreateInput
+  connect: CustomizeSiteWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type CustomizeSiteEdge {
+  """The item at the end of the edge."""
+  node: CustomizeSite!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CustomizeSiteOrderByInput {
+  id_ASC
+  id_DESC
+  headerText_ASC
+  headerText_DESC
+  headerImage_ASC
+  headerImage_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CustomizeSitePreviousValues {
+  id: ID!
+  headerText: String
+  headerImage: String
+}
+
+type CustomizeSiteSubscriptionPayload {
+  mutation: MutationType!
+  node: CustomizeSite
+  updatedFields: [String!]
+  previousValues: CustomizeSitePreviousValues
+}
+
+input CustomizeSiteSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CustomizeSiteSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CustomizeSiteSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CustomizeSiteSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CustomizeSiteWhereInput
+}
+
+input CustomizeSiteUpdateDataInput {
+  headerText: String
+  headerImage: String
+  theme: ThemeColorUpdateOneInput
+}
+
+input CustomizeSiteUpdateInput {
+  headerText: String
+  headerImage: String
+  theme: ThemeColorUpdateOneInput
+}
+
+input CustomizeSiteUpdateOneInput {
+  create: CustomizeSiteCreateInput
+  connect: CustomizeSiteWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CustomizeSiteUpdateDataInput
+  upsert: CustomizeSiteUpsertNestedInput
+}
+
+input CustomizeSiteUpsertNestedInput {
+  update: CustomizeSiteUpdateDataInput!
+  create: CustomizeSiteCreateInput!
+}
+
+input CustomizeSiteWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CustomizeSiteWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CustomizeSiteWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CustomizeSiteWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  headerText: String
+
+  """All values that are not equal to given value."""
+  headerText_not: String
+
+  """All values that are contained in given list."""
+  headerText_in: [String!]
+
+  """All values that are not contained in given list."""
+  headerText_not_in: [String!]
+
+  """All values less than the given value."""
+  headerText_lt: String
+
+  """All values less than or equal the given value."""
+  headerText_lte: String
+
+  """All values greater than the given value."""
+  headerText_gt: String
+
+  """All values greater than or equal the given value."""
+  headerText_gte: String
+
+  """All values containing the given string."""
+  headerText_contains: String
+
+  """All values not containing the given string."""
+  headerText_not_contains: String
+
+  """All values starting with the given string."""
+  headerText_starts_with: String
+
+  """All values not starting with the given string."""
+  headerText_not_starts_with: String
+
+  """All values ending with the given string."""
+  headerText_ends_with: String
+
+  """All values not ending with the given string."""
+  headerText_not_ends_with: String
+  headerImage: String
+
+  """All values that are not equal to given value."""
+  headerImage_not: String
+
+  """All values that are contained in given list."""
+  headerImage_in: [String!]
+
+  """All values that are not contained in given list."""
+  headerImage_not_in: [String!]
+
+  """All values less than the given value."""
+  headerImage_lt: String
+
+  """All values less than or equal the given value."""
+  headerImage_lte: String
+
+  """All values greater than the given value."""
+  headerImage_gt: String
+
+  """All values greater than or equal the given value."""
+  headerImage_gte: String
+
+  """All values containing the given string."""
+  headerImage_contains: String
+
+  """All values not containing the given string."""
+  headerImage_not_contains: String
+
+  """All values starting with the given string."""
+  headerImage_starts_with: String
+
+  """All values not starting with the given string."""
+  headerImage_not_starts_with: String
+
+  """All values ending with the given string."""
+  headerImage_ends_with: String
+
+  """All values not ending with the given string."""
+  headerImage_not_ends_with: String
+  theme: ThemeColorWhereInput
+}
+
+input CustomizeSiteWhereUniqueInput {
+  id: ID
+}
+
+type Gallery {
+  url: String!
+}
+
+"""A connection to a list of items."""
+type GalleryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [GalleryEdge]!
+  aggregate: AggregateGallery!
+}
+
+input GalleryCreateInput {
+  url: String!
+}
+
+input GalleryCreateManyInput {
+  create: [GalleryCreateInput!]
+}
+
+"""An edge in a connection."""
+type GalleryEdge {
+  """The item at the end of the edge."""
+  node: Gallery!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum GalleryOrderByInput {
+  url_ASC
+  url_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type GalleryPreviousValues {
+  url: String!
+}
+
+type GallerySubscriptionPayload {
+  mutation: MutationType!
+  node: Gallery
+  updatedFields: [String!]
+  previousValues: GalleryPreviousValues
+}
+
+input GallerySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GallerySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GallerySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GallerySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: GalleryWhereInput
+}
+
+input GalleryUpdateInput {
+  url: String
+}
+
+input GalleryUpdateManyInput {
+  create: [GalleryCreateInput!]
+}
+
+input GalleryWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GalleryWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GalleryWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GalleryWhereInput!]
+  url: String
+
+  """All values that are not equal to given value."""
+  url_not: String
+
+  """All values that are contained in given list."""
+  url_in: [String!]
+
+  """All values that are not contained in given list."""
+  url_not_in: [String!]
+
+  """All values less than the given value."""
+  url_lt: String
+
+  """All values less than or equal the given value."""
+  url_lte: String
+
+  """All values greater than the given value."""
+  url_gt: String
+
+  """All values greater than or equal the given value."""
+  url_gte: String
+
+  """All values containing the given string."""
+  url_contains: String
+
+  """All values not containing the given string."""
+  url_not_contains: String
+
+  """All values starting with the given string."""
+  url_starts_with: String
+
+  """All values not starting with the given string."""
+  url_not_starts_with: String
+
+  """All values ending with the given string."""
+  url_ends_with: String
+
+  """All values not ending with the given string."""
+  url_not_ends_with: String
+}
+
+type Image {
+  url: String!
+}
+
+"""A connection to a list of items."""
+type ImageConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ImageEdge]!
+  aggregate: AggregateImage!
+}
+
+input ImageCreateInput {
+  url: String!
+}
+
+input ImageCreateOneInput {
+  create: ImageCreateInput
+}
+
+"""An edge in a connection."""
+type ImageEdge {
+  """The item at the end of the edge."""
+  node: Image!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ImageOrderByInput {
+  url_ASC
+  url_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ImagePreviousValues {
+  url: String!
+}
+
+type ImageSubscriptionPayload {
+  mutation: MutationType!
+  node: Image
+  updatedFields: [String!]
+  previousValues: ImagePreviousValues
+}
+
+input ImageSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ImageWhereInput
+}
+
+input ImageUpdateDataInput {
+  url: String
+}
+
+input ImageUpdateInput {
+  url: String
+}
+
+input ImageUpdateOneInput {
+  create: ImageCreateInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ImageUpdateDataInput
+  upsert: ImageUpsertNestedInput
+}
+
+input ImageUpsertNestedInput {
+  update: ImageUpdateDataInput!
+  create: ImageCreateInput!
+}
+
+input ImageWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageWhereInput!]
+  url: String
+
+  """All values that are not equal to given value."""
+  url_not: String
+
+  """All values that are contained in given list."""
+  url_in: [String!]
+
+  """All values that are not contained in given list."""
+  url_not_in: [String!]
+
+  """All values less than the given value."""
+  url_lt: String
+
+  """All values less than or equal the given value."""
+  url_lte: String
+
+  """All values greater than the given value."""
+  url_gt: String
+
+  """All values greater than or equal the given value."""
+  url_gte: String
+
+  """All values containing the given string."""
+  url_contains: String
+
+  """All values not containing the given string."""
+  url_not_contains: String
+
+  """All values starting with the given string."""
+  url_starts_with: String
+
+  """All values not starting with the given string."""
+  url_not_starts_with: String
+
+  """All values ending with the given string."""
+  url_ends_with: String
+
+  """All values not ending with the given string."""
+  url_not_ends_with: String
+}
+
+type Location implements Node {
+  id: ID!
+  lat: Float!
+  lng: Float!
+  site(where: SiteWhereInput): Site
+  address: String!
+}
+
+"""A connection to a list of items."""
+type LocationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LocationEdge]!
+  aggregate: AggregateLocation!
+}
+
+input LocationCreateInput {
+  lat: Float!
+  lng: Float!
+  address: String!
+  site: SiteCreateOneWithoutLocationInput
+}
+
+input LocationCreateOneWithoutSiteInput {
+  create: LocationCreateWithoutSiteInput
+  connect: LocationWhereUniqueInput
+}
+
+input LocationCreateWithoutSiteInput {
+  lat: Float!
+  lng: Float!
+  address: String!
+}
+
+"""An edge in a connection."""
+type LocationEdge {
+  """The item at the end of the edge."""
+  node: Location!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LocationOrderByInput {
+  id_ASC
+  id_DESC
+  lat_ASC
+  lat_DESC
+  lng_ASC
+  lng_DESC
+  address_ASC
+  address_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type LocationPreviousValues {
+  id: ID!
+  lat: Float!
+  lng: Float!
+  address: String!
+}
+
+type LocationSubscriptionPayload {
+  mutation: MutationType!
+  node: Location
+  updatedFields: [String!]
+  previousValues: LocationPreviousValues
+}
+
+input LocationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LocationWhereInput
+}
+
+input LocationUpdateInput {
+  lat: Float
+  lng: Float
+  address: String
+  site: SiteUpdateOneWithoutLocationInput
+}
+
+input LocationUpdateOneWithoutSiteInput {
+  create: LocationCreateWithoutSiteInput
+  connect: LocationWhereUniqueInput
+  delete: Boolean
+  update: LocationUpdateWithoutSiteDataInput
+  upsert: LocationUpsertWithoutSiteInput
+}
+
+input LocationUpdateWithoutSiteDataInput {
+  lat: Float
+  lng: Float
+  address: String
+}
+
+input LocationUpsertWithoutSiteInput {
+  update: LocationUpdateWithoutSiteDataInput!
+  create: LocationCreateWithoutSiteInput!
+}
+
+input LocationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  lat: Float
+
+  """All values that are not equal to given value."""
+  lat_not: Float
+
+  """All values that are contained in given list."""
+  lat_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lat_not_in: [Float!]
+
+  """All values less than the given value."""
+  lat_lt: Float
+
+  """All values less than or equal the given value."""
+  lat_lte: Float
+
+  """All values greater than the given value."""
+  lat_gt: Float
+
+  """All values greater than or equal the given value."""
+  lat_gte: Float
+  lng: Float
+
+  """All values that are not equal to given value."""
+  lng_not: Float
+
+  """All values that are contained in given list."""
+  lng_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lng_not_in: [Float!]
+
+  """All values less than the given value."""
+  lng_lt: Float
+
+  """All values less than or equal the given value."""
+  lng_lte: Float
+
+  """All values greater than the given value."""
+  lng_gt: Float
+
+  """All values greater than or equal the given value."""
+  lng_gte: Float
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  site: SiteWhereInput
+}
+
+input LocationWhereUniqueInput {
+  id: ID
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createCompany(data: CompanyCreateInput!): Company!
+  createSite(data: SiteCreateInput!): Site!
+  createCategory(data: CategoryCreateInput!): Category!
+  createProductType(data: ProductTypeCreateInput!): ProductType!
+  createProduct(data: ProductCreateInput!): Product!
+  createLocation(data: LocationCreateInput!): Location!
+  createTeam(data: TeamCreateInput!): Team!
+  createPricing(data: PricingCreateInput!): Pricing!
+  createImage(data: ImageCreateInput!): Image!
+  createGallery(data: GalleryCreateInput!): Gallery!
+  createSlug(data: SlugCreateInput!): Slug!
+  createCustomizeSite(data: CustomizeSiteCreateInput!): CustomizeSite!
+  createThemeColor(data: ThemeColorCreateInput!): ThemeColor!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company
+  updateSite(data: SiteUpdateInput!, where: SiteWhereUniqueInput!): Site
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
+  updateProductType(data: ProductTypeUpdateInput!, where: ProductTypeWhereUniqueInput!): ProductType
+  updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
+  updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
+  updatePricing(data: PricingUpdateInput!, where: PricingWhereUniqueInput!): Pricing
+  updateSlug(data: SlugUpdateInput!, where: SlugWhereUniqueInput!): Slug
+  updateCustomizeSite(data: CustomizeSiteUpdateInput!, where: CustomizeSiteWhereUniqueInput!): CustomizeSite
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteCompany(where: CompanyWhereUniqueInput!): Company
+  deleteSite(where: SiteWhereUniqueInput!): Site
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
+  deleteProductType(where: ProductTypeWhereUniqueInput!): ProductType
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteLocation(where: LocationWhereUniqueInput!): Location
+  deleteTeam(where: TeamWhereUniqueInput!): Team
+  deletePricing(where: PricingWhereUniqueInput!): Pricing
+  deleteSlug(where: SlugWhereUniqueInput!): Slug
+  deleteCustomizeSite(where: CustomizeSiteWhereUniqueInput!): CustomizeSite
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertCompany(where: CompanyWhereUniqueInput!, create: CompanyCreateInput!, update: CompanyUpdateInput!): Company!
+  upsertSite(where: SiteWhereUniqueInput!, create: SiteCreateInput!, update: SiteUpdateInput!): Site!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
+  upsertProductType(where: ProductTypeWhereUniqueInput!, create: ProductTypeCreateInput!, update: ProductTypeUpdateInput!): ProductType!
+  upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
+  upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
+  upsertPricing(where: PricingWhereUniqueInput!, create: PricingCreateInput!, update: PricingUpdateInput!): Pricing!
+  upsertSlug(where: SlugWhereUniqueInput!, create: SlugCreateInput!, update: SlugUpdateInput!): Slug!
+  upsertCustomizeSite(where: CustomizeSiteWhereUniqueInput!, create: CustomizeSiteCreateInput!, update: CustomizeSiteUpdateInput!): CustomizeSite!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyCompanies(data: CompanyUpdateInput!, where: CompanyWhereInput): BatchPayload!
+  updateManySites(data: SiteUpdateInput!, where: SiteWhereInput): BatchPayload!
+  updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
+  updateManyProductTypes(data: ProductTypeUpdateInput!, where: ProductTypeWhereInput): BatchPayload!
+  updateManyProducts(data: ProductUpdateInput!, where: ProductWhereInput): BatchPayload!
+  updateManyLocations(data: LocationUpdateInput!, where: LocationWhereInput): BatchPayload!
+  updateManyTeams(data: TeamUpdateInput!, where: TeamWhereInput): BatchPayload!
+  updateManyPricings(data: PricingUpdateInput!, where: PricingWhereInput): BatchPayload!
+  updateManyImages(data: ImageUpdateInput!, where: ImageWhereInput): BatchPayload!
+  updateManyGalleries(data: GalleryUpdateInput!, where: GalleryWhereInput): BatchPayload!
+  updateManySlugs(data: SlugUpdateInput!, where: SlugWhereInput): BatchPayload!
+  updateManyCustomizeSites(data: CustomizeSiteUpdateInput!, where: CustomizeSiteWhereInput): BatchPayload!
+  updateManyThemeColors(data: ThemeColorUpdateInput!, where: ThemeColorWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyCompanies(where: CompanyWhereInput): BatchPayload!
+  deleteManySites(where: SiteWhereInput): BatchPayload!
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  deleteManyProductTypes(where: ProductTypeWhereInput): BatchPayload!
+  deleteManyProducts(where: ProductWhereInput): BatchPayload!
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
+  deleteManyTeams(where: TeamWhereInput): BatchPayload!
+  deleteManyPricings(where: PricingWhereInput): BatchPayload!
+  deleteManyImages(where: ImageWhereInput): BatchPayload!
+  deleteManyGalleries(where: GalleryWhereInput): BatchPayload!
+  deleteManySlugs(where: SlugWhereInput): BatchPayload!
+  deleteManyCustomizeSites(where: CustomizeSiteWhereInput): BatchPayload!
+  deleteManyThemeColors(where: ThemeColorWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Pricing implements Node {
+  id: ID!
+  product(where: ProductWhereInput): Product!
+  rangePricing: Boolean!
+  day: Int!
+  week: Int!
+  month: Int!
+}
+
+"""A connection to a list of items."""
+type PricingConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PricingEdge]!
+  aggregate: AggregatePricing!
+}
+
+input PricingCreateInput {
+  rangePricing: Boolean!
+  day: Int!
+  week: Int!
+  month: Int!
+  product: ProductCreateOneWithoutPricingInput!
+}
+
+input PricingCreateOneWithoutProductInput {
+  create: PricingCreateWithoutProductInput
+  connect: PricingWhereUniqueInput
+}
+
+input PricingCreateWithoutProductInput {
+  rangePricing: Boolean!
+  day: Int!
+  week: Int!
+  month: Int!
+}
+
+"""An edge in a connection."""
+type PricingEdge {
+  """The item at the end of the edge."""
+  node: Pricing!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PricingOrderByInput {
+  id_ASC
+  id_DESC
+  rangePricing_ASC
+  rangePricing_DESC
+  day_ASC
+  day_DESC
+  week_ASC
+  week_DESC
+  month_ASC
+  month_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PricingPreviousValues {
+  id: ID!
+  rangePricing: Boolean!
+  day: Int!
+  week: Int!
+  month: Int!
+}
+
+type PricingSubscriptionPayload {
+  mutation: MutationType!
+  node: Pricing
+  updatedFields: [String!]
+  previousValues: PricingPreviousValues
+}
+
+input PricingSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PricingSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PricingSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PricingSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PricingWhereInput
+}
+
+input PricingUpdateInput {
+  rangePricing: Boolean
+  day: Int
+  week: Int
+  month: Int
+  product: ProductUpdateOneWithoutPricingInput
+}
+
+input PricingUpdateOneWithoutProductInput {
+  create: PricingCreateWithoutProductInput
+  connect: PricingWhereUniqueInput
+  delete: Boolean
+  update: PricingUpdateWithoutProductDataInput
+  upsert: PricingUpsertWithoutProductInput
+}
+
+input PricingUpdateWithoutProductDataInput {
+  rangePricing: Boolean
+  day: Int
+  week: Int
+  month: Int
+}
+
+input PricingUpsertWithoutProductInput {
+  update: PricingUpdateWithoutProductDataInput!
+  create: PricingCreateWithoutProductInput!
+}
+
+input PricingWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PricingWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PricingWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PricingWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  rangePricing: Boolean
+
+  """All values that are not equal to given value."""
+  rangePricing_not: Boolean
+  day: Int
+
+  """All values that are not equal to given value."""
+  day_not: Int
+
+  """All values that are contained in given list."""
+  day_in: [Int!]
+
+  """All values that are not contained in given list."""
+  day_not_in: [Int!]
+
+  """All values less than the given value."""
+  day_lt: Int
+
+  """All values less than or equal the given value."""
+  day_lte: Int
+
+  """All values greater than the given value."""
+  day_gt: Int
+
+  """All values greater than or equal the given value."""
+  day_gte: Int
+  week: Int
+
+  """All values that are not equal to given value."""
+  week_not: Int
+
+  """All values that are contained in given list."""
+  week_in: [Int!]
+
+  """All values that are not contained in given list."""
+  week_not_in: [Int!]
+
+  """All values less than the given value."""
+  week_lt: Int
+
+  """All values less than or equal the given value."""
+  week_lte: Int
+
+  """All values greater than the given value."""
+  week_gt: Int
+
+  """All values greater than or equal the given value."""
+  week_gte: Int
+  month: Int
+
+  """All values that are not equal to given value."""
+  month_not: Int
+
+  """All values that are contained in given list."""
+  month_in: [Int!]
+
+  """All values that are not contained in given list."""
+  month_not_in: [Int!]
+
+  """All values less than the given value."""
+  month_lt: Int
+
+  """All values less than or equal the given value."""
+  month_lte: Int
+
+  """All values greater than the given value."""
+  month_gt: Int
+
+  """All values greater than or equal the given value."""
+  month_gte: Int
+  product: ProductWhereInput
+}
+
+input PricingWhereUniqueInput {
+  id: ID
+}
+
+type Product implements Node {
+  id: ID!
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+  featuredImage(where: ImageWhereInput): Image!
+  slug(where: SlugWhereInput): Slug!
+  gallery(where: GalleryWhereInput, orderBy: GalleryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Gallery!]
+  pricing(where: PricingWhereInput): Pricing!
+  type(where: ProductTypeWhereInput): ProductType!
+}
+
+"""A connection to a list of items."""
+type ProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProductEdge]!
+  aggregate: AggregateProduct!
+}
+
+input ProductCreateInput {
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+  featuredImage: ImageCreateOneInput!
+  slug: SlugCreateOneWithoutProductInput!
+  gallery: GalleryCreateManyInput
+  pricing: PricingCreateOneWithoutProductInput!
+  type: ProductTypeCreateOneWithoutProductsInput!
+}
+
+input ProductCreateManyWithoutTypeInput {
+  create: [ProductCreateWithoutTypeInput!]
+  connect: [ProductWhereUniqueInput!]
+}
+
+input ProductCreateOneWithoutPricingInput {
+  create: ProductCreateWithoutPricingInput
+  connect: ProductWhereUniqueInput
+}
+
+input ProductCreateOneWithoutSlugInput {
+  create: ProductCreateWithoutSlugInput
+  connect: ProductWhereUniqueInput
+}
+
+input ProductCreateWithoutPricingInput {
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+  featuredImage: ImageCreateOneInput!
+  slug: SlugCreateOneWithoutProductInput!
+  gallery: GalleryCreateManyInput
+  type: ProductTypeCreateOneWithoutProductsInput!
+}
+
+input ProductCreateWithoutSlugInput {
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+  featuredImage: ImageCreateOneInput!
+  gallery: GalleryCreateManyInput
+  pricing: PricingCreateOneWithoutProductInput!
+  type: ProductTypeCreateOneWithoutProductsInput!
+}
+
+input ProductCreateWithoutTypeInput {
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+  featuredImage: ImageCreateOneInput!
+  slug: SlugCreateOneWithoutProductInput!
+  gallery: GalleryCreateManyInput
+  pricing: PricingCreateOneWithoutProductInput!
+}
+
+"""An edge in a connection."""
+type ProductEdge {
+  """The item at the end of the edge."""
+  node: Product!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ProductOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  shortDescription_ASC
+  shortDescription_DESC
+  longDescription_ASC
+  longDescription_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ProductPreviousValues {
+  id: ID!
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+}
+
+type ProductSubscriptionPayload {
+  mutation: MutationType!
+  node: Product
+  updatedFields: [String!]
+  previousValues: ProductPreviousValues
+}
+
+input ProductSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ProductWhereInput
+}
+
+type ProductType implements Node {
+  id: ID!
+  name: String!
+  description: String!
+  image(where: ImageWhereInput): Image
+  slug(where: SlugWhereInput): Slug!
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
+  category(where: CategoryWhereInput): Category!
+  featured: Boolean!
+}
+
+"""A connection to a list of items."""
+type ProductTypeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProductTypeEdge]!
+  aggregate: AggregateProductType!
+}
+
+input ProductTypeCreateInput {
+  name: String!
+  description: String!
+  featured: Boolean
+  image: ImageCreateOneInput
+  slug: SlugCreateOneWithoutProductTypeInput!
+  products: ProductCreateManyWithoutTypeInput
+  category: CategoryCreateOneWithoutProductTypeInput!
+}
+
+input ProductTypeCreateManyWithoutCategoryInput {
+  create: [ProductTypeCreateWithoutCategoryInput!]
+  connect: [ProductTypeWhereUniqueInput!]
+}
+
+input ProductTypeCreateOneWithoutProductsInput {
+  create: ProductTypeCreateWithoutProductsInput
+  connect: ProductTypeWhereUniqueInput
+}
+
+input ProductTypeCreateOneWithoutSlugInput {
+  create: ProductTypeCreateWithoutSlugInput
+  connect: ProductTypeWhereUniqueInput
+}
+
+input ProductTypeCreateWithoutCategoryInput {
+  name: String!
+  description: String!
+  featured: Boolean
+  image: ImageCreateOneInput
+  slug: SlugCreateOneWithoutProductTypeInput!
+  products: ProductCreateManyWithoutTypeInput
+}
+
+input ProductTypeCreateWithoutProductsInput {
+  name: String!
+  description: String!
+  featured: Boolean
+  image: ImageCreateOneInput
+  slug: SlugCreateOneWithoutProductTypeInput!
+  category: CategoryCreateOneWithoutProductTypeInput!
+}
+
+input ProductTypeCreateWithoutSlugInput {
+  name: String!
+  description: String!
+  featured: Boolean
+  image: ImageCreateOneInput
+  products: ProductCreateManyWithoutTypeInput
+  category: CategoryCreateOneWithoutProductTypeInput!
+}
+
+"""An edge in a connection."""
+type ProductTypeEdge {
+  """The item at the end of the edge."""
+  node: ProductType!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ProductTypeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  featured_ASC
+  featured_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ProductTypePreviousValues {
+  id: ID!
+  name: String!
+  description: String!
+  featured: Boolean!
+}
+
+type ProductTypeSubscriptionPayload {
+  mutation: MutationType!
+  node: ProductType
+  updatedFields: [String!]
+  previousValues: ProductTypePreviousValues
+}
+
+input ProductTypeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductTypeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductTypeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductTypeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ProductTypeWhereInput
+}
+
+input ProductTypeUpdateInput {
+  name: String
+  description: String
+  featured: Boolean
+  image: ImageUpdateOneInput
+  slug: SlugUpdateOneWithoutProductTypeInput
+  products: ProductUpdateManyWithoutTypeInput
+  category: CategoryUpdateOneWithoutProductTypeInput
+}
+
+input ProductTypeUpdateManyWithoutCategoryInput {
+  create: [ProductTypeCreateWithoutCategoryInput!]
+  connect: [ProductTypeWhereUniqueInput!]
+  disconnect: [ProductTypeWhereUniqueInput!]
+  delete: [ProductTypeWhereUniqueInput!]
+  update: [ProductTypeUpdateWithWhereUniqueWithoutCategoryInput!]
+  upsert: [ProductTypeUpsertWithWhereUniqueWithoutCategoryInput!]
+}
+
+input ProductTypeUpdateOneWithoutProductsInput {
+  create: ProductTypeCreateWithoutProductsInput
+  connect: ProductTypeWhereUniqueInput
+  delete: Boolean
+  update: ProductTypeUpdateWithoutProductsDataInput
+  upsert: ProductTypeUpsertWithoutProductsInput
+}
+
+input ProductTypeUpdateOneWithoutSlugInput {
+  create: ProductTypeCreateWithoutSlugInput
+  connect: ProductTypeWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ProductTypeUpdateWithoutSlugDataInput
+  upsert: ProductTypeUpsertWithoutSlugInput
+}
+
+input ProductTypeUpdateWithoutCategoryDataInput {
+  name: String
+  description: String
+  featured: Boolean
+  image: ImageUpdateOneInput
+  slug: SlugUpdateOneWithoutProductTypeInput
+  products: ProductUpdateManyWithoutTypeInput
+}
+
+input ProductTypeUpdateWithoutProductsDataInput {
+  name: String
+  description: String
+  featured: Boolean
+  image: ImageUpdateOneInput
+  slug: SlugUpdateOneWithoutProductTypeInput
+  category: CategoryUpdateOneWithoutProductTypeInput
+}
+
+input ProductTypeUpdateWithoutSlugDataInput {
+  name: String
+  description: String
+  featured: Boolean
+  image: ImageUpdateOneInput
+  products: ProductUpdateManyWithoutTypeInput
+  category: CategoryUpdateOneWithoutProductTypeInput
+}
+
+input ProductTypeUpdateWithWhereUniqueWithoutCategoryInput {
+  where: ProductTypeWhereUniqueInput!
+  data: ProductTypeUpdateWithoutCategoryDataInput!
+}
+
+input ProductTypeUpsertWithoutProductsInput {
+  update: ProductTypeUpdateWithoutProductsDataInput!
+  create: ProductTypeCreateWithoutProductsInput!
+}
+
+input ProductTypeUpsertWithoutSlugInput {
+  update: ProductTypeUpdateWithoutSlugDataInput!
+  create: ProductTypeCreateWithoutSlugInput!
+}
+
+input ProductTypeUpsertWithWhereUniqueWithoutCategoryInput {
+  where: ProductTypeWhereUniqueInput!
+  update: ProductTypeUpdateWithoutCategoryDataInput!
+  create: ProductTypeCreateWithoutCategoryInput!
+}
+
+input ProductTypeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductTypeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductTypeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductTypeWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  featured: Boolean
+
+  """All values that are not equal to given value."""
+  featured_not: Boolean
+  image: ImageWhereInput
+  slug: SlugWhereInput
+  products_every: ProductWhereInput
+  products_some: ProductWhereInput
+  products_none: ProductWhereInput
+  category: CategoryWhereInput
+}
+
+input ProductTypeWhereUniqueInput {
+  id: ID
+}
+
+input ProductUpdateInput {
+  name: String
+  shortDescription: String
+  longDescription: String
+  featuredImage: ImageUpdateOneInput
+  slug: SlugUpdateOneWithoutProductInput
+  gallery: GalleryUpdateManyInput
+  pricing: PricingUpdateOneWithoutProductInput
+  type: ProductTypeUpdateOneWithoutProductsInput
+}
+
+input ProductUpdateManyWithoutTypeInput {
+  create: [ProductCreateWithoutTypeInput!]
+  connect: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  delete: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutTypeInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutTypeInput!]
+}
+
+input ProductUpdateOneWithoutPricingInput {
+  create: ProductCreateWithoutPricingInput
+  connect: ProductWhereUniqueInput
+  delete: Boolean
+  update: ProductUpdateWithoutPricingDataInput
+  upsert: ProductUpsertWithoutPricingInput
+}
+
+input ProductUpdateOneWithoutSlugInput {
+  create: ProductCreateWithoutSlugInput
+  connect: ProductWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ProductUpdateWithoutSlugDataInput
+  upsert: ProductUpsertWithoutSlugInput
+}
+
+input ProductUpdateWithoutPricingDataInput {
+  name: String
+  shortDescription: String
+  longDescription: String
+  featuredImage: ImageUpdateOneInput
+  slug: SlugUpdateOneWithoutProductInput
+  gallery: GalleryUpdateManyInput
+  type: ProductTypeUpdateOneWithoutProductsInput
+}
+
+input ProductUpdateWithoutSlugDataInput {
+  name: String
+  shortDescription: String
+  longDescription: String
+  featuredImage: ImageUpdateOneInput
+  gallery: GalleryUpdateManyInput
+  pricing: PricingUpdateOneWithoutProductInput
+  type: ProductTypeUpdateOneWithoutProductsInput
+}
+
+input ProductUpdateWithoutTypeDataInput {
+  name: String
+  shortDescription: String
+  longDescription: String
+  featuredImage: ImageUpdateOneInput
+  slug: SlugUpdateOneWithoutProductInput
+  gallery: GalleryUpdateManyInput
+  pricing: PricingUpdateOneWithoutProductInput
+}
+
+input ProductUpdateWithWhereUniqueWithoutTypeInput {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateWithoutTypeDataInput!
+}
+
+input ProductUpsertWithoutPricingInput {
+  update: ProductUpdateWithoutPricingDataInput!
+  create: ProductCreateWithoutPricingInput!
+}
+
+input ProductUpsertWithoutSlugInput {
+  update: ProductUpdateWithoutSlugDataInput!
+  create: ProductCreateWithoutSlugInput!
+}
+
+input ProductUpsertWithWhereUniqueWithoutTypeInput {
+  where: ProductWhereUniqueInput!
+  update: ProductUpdateWithoutTypeDataInput!
+  create: ProductCreateWithoutTypeInput!
+}
+
+input ProductWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  shortDescription: String
+
+  """All values that are not equal to given value."""
+  shortDescription_not: String
+
+  """All values that are contained in given list."""
+  shortDescription_in: [String!]
+
+  """All values that are not contained in given list."""
+  shortDescription_not_in: [String!]
+
+  """All values less than the given value."""
+  shortDescription_lt: String
+
+  """All values less than or equal the given value."""
+  shortDescription_lte: String
+
+  """All values greater than the given value."""
+  shortDescription_gt: String
+
+  """All values greater than or equal the given value."""
+  shortDescription_gte: String
+
+  """All values containing the given string."""
+  shortDescription_contains: String
+
+  """All values not containing the given string."""
+  shortDescription_not_contains: String
+
+  """All values starting with the given string."""
+  shortDescription_starts_with: String
+
+  """All values not starting with the given string."""
+  shortDescription_not_starts_with: String
+
+  """All values ending with the given string."""
+  shortDescription_ends_with: String
+
+  """All values not ending with the given string."""
+  shortDescription_not_ends_with: String
+  longDescription: String
+
+  """All values that are not equal to given value."""
+  longDescription_not: String
+
+  """All values that are contained in given list."""
+  longDescription_in: [String!]
+
+  """All values that are not contained in given list."""
+  longDescription_not_in: [String!]
+
+  """All values less than the given value."""
+  longDescription_lt: String
+
+  """All values less than or equal the given value."""
+  longDescription_lte: String
+
+  """All values greater than the given value."""
+  longDescription_gt: String
+
+  """All values greater than or equal the given value."""
+  longDescription_gte: String
+
+  """All values containing the given string."""
+  longDescription_contains: String
+
+  """All values not containing the given string."""
+  longDescription_not_contains: String
+
+  """All values starting with the given string."""
+  longDescription_starts_with: String
+
+  """All values not starting with the given string."""
+  longDescription_not_starts_with: String
+
+  """All values ending with the given string."""
+  longDescription_ends_with: String
+
+  """All values not ending with the given string."""
+  longDescription_not_ends_with: String
+  featuredImage: ImageWhereInput
+  slug: SlugWhereInput
+  gallery_every: GalleryWhereInput
+  gallery_some: GalleryWhereInput
+  gallery_none: GalleryWhereInput
+  pricing: PricingWhereInput
+  type: ProductTypeWhereInput
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  companies(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Company]!
+  sites(where: SiteWhereInput, orderBy: SiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Site]!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
+  productTypes(where: ProductTypeWhereInput, orderBy: ProductTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProductType]!
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
+  pricings(where: PricingWhereInput, orderBy: PricingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pricing]!
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
+  galleries(where: GalleryWhereInput, orderBy: GalleryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Gallery]!
+  slugs(where: SlugWhereInput, orderBy: SlugOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Slug]!
+  customizeSites(where: CustomizeSiteWhereInput, orderBy: CustomizeSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CustomizeSite]!
+  themeColors(where: ThemeColorWhereInput, orderBy: ThemeColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ThemeColor]!
+  user(where: UserWhereUniqueInput!): User
+  company(where: CompanyWhereUniqueInput!): Company
+  site(where: SiteWhereUniqueInput!): Site
+  category(where: CategoryWhereUniqueInput!): Category
+  productType(where: ProductTypeWhereUniqueInput!): ProductType
+  product(where: ProductWhereUniqueInput!): Product
+  location(where: LocationWhereUniqueInput!): Location
+  team(where: TeamWhereUniqueInput!): Team
+  pricing(where: PricingWhereUniqueInput!): Pricing
+  slug(where: SlugWhereUniqueInput!): Slug
+  customizeSite(where: CustomizeSiteWhereUniqueInput!): CustomizeSite
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  companiesConnection(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CompanyConnection!
+  sitesConnection(where: SiteWhereInput, orderBy: SiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SiteConnection!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
+  productTypesConnection(where: ProductTypeWhereInput, orderBy: ProductTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductTypeConnection!
+  productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
+  teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
+  pricingsConnection(where: PricingWhereInput, orderBy: PricingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PricingConnection!
+  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
+  galleriesConnection(where: GalleryWhereInput, orderBy: GalleryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GalleryConnection!
+  slugsConnection(where: SlugWhereInput, orderBy: SlugOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SlugConnection!
+  customizeSitesConnection(where: CustomizeSiteWhereInput, orderBy: CustomizeSiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomizeSiteConnection!
+  themeColorsConnection(where: ThemeColorWhereInput, orderBy: ThemeColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ThemeColorConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Site implements Node {
+  id: ID!
+  name: String!
+  location(where: LocationWhereInput): Location!
+  slug(where: SlugWhereInput): Slug!
+  company(where: CompanyWhereInput): Company!
+  category(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
+  team(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+  custom(where: CustomizeSiteWhereInput): CustomizeSite
+}
+
+"""A connection to a list of items."""
+type SiteConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SiteEdge]!
+  aggregate: AggregateSite!
+}
+
+input SiteCreateInput {
+  name: String!
+  location: LocationCreateOneWithoutSiteInput!
+  slug: SlugCreateOneWithoutSiteInput!
+  company: CompanyCreateOneWithoutSitesInput!
+  category: CategoryCreateManyWithoutSiteInput
+  team: TeamCreateManyWithoutSiteInput
+  custom: CustomizeSiteCreateOneInput
+}
+
+input SiteCreateManyWithoutCompanyInput {
+  create: [SiteCreateWithoutCompanyInput!]
+  connect: [SiteWhereUniqueInput!]
+}
+
+input SiteCreateOneWithoutCategoryInput {
+  create: SiteCreateWithoutCategoryInput
+  connect: SiteWhereUniqueInput
+}
+
+input SiteCreateOneWithoutLocationInput {
+  create: SiteCreateWithoutLocationInput
+  connect: SiteWhereUniqueInput
+}
+
+input SiteCreateOneWithoutSlugInput {
+  create: SiteCreateWithoutSlugInput
+  connect: SiteWhereUniqueInput
+}
+
+input SiteCreateOneWithoutTeamInput {
+  create: SiteCreateWithoutTeamInput
+  connect: SiteWhereUniqueInput
+}
+
+input SiteCreateWithoutCategoryInput {
+  name: String!
+  location: LocationCreateOneWithoutSiteInput!
+  slug: SlugCreateOneWithoutSiteInput!
+  company: CompanyCreateOneWithoutSitesInput!
+  team: TeamCreateManyWithoutSiteInput
+  custom: CustomizeSiteCreateOneInput
+}
+
+input SiteCreateWithoutCompanyInput {
+  name: String!
+  location: LocationCreateOneWithoutSiteInput!
+  slug: SlugCreateOneWithoutSiteInput!
+  category: CategoryCreateManyWithoutSiteInput
+  team: TeamCreateManyWithoutSiteInput
+  custom: CustomizeSiteCreateOneInput
+}
+
+input SiteCreateWithoutLocationInput {
+  name: String!
+  slug: SlugCreateOneWithoutSiteInput!
+  company: CompanyCreateOneWithoutSitesInput!
+  category: CategoryCreateManyWithoutSiteInput
+  team: TeamCreateManyWithoutSiteInput
+  custom: CustomizeSiteCreateOneInput
+}
+
+input SiteCreateWithoutSlugInput {
+  name: String!
+  location: LocationCreateOneWithoutSiteInput!
+  company: CompanyCreateOneWithoutSitesInput!
+  category: CategoryCreateManyWithoutSiteInput
+  team: TeamCreateManyWithoutSiteInput
+  custom: CustomizeSiteCreateOneInput
+}
+
+input SiteCreateWithoutTeamInput {
+  name: String!
+  location: LocationCreateOneWithoutSiteInput!
+  slug: SlugCreateOneWithoutSiteInput!
+  company: CompanyCreateOneWithoutSitesInput!
+  category: CategoryCreateManyWithoutSiteInput
+  custom: CustomizeSiteCreateOneInput
+}
+
+"""An edge in a connection."""
+type SiteEdge {
+  """The item at the end of the edge."""
+  node: Site!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SiteOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SitePreviousValues {
+  id: ID!
+  name: String!
+}
+
+type SiteSubscriptionPayload {
+  mutation: MutationType!
+  node: Site
+  updatedFields: [String!]
+  previousValues: SitePreviousValues
+}
+
+input SiteSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SiteSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SiteSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SiteSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SiteWhereInput
+}
+
+input SiteUpdateInput {
+  name: String
+  location: LocationUpdateOneWithoutSiteInput
+  slug: SlugUpdateOneWithoutSiteInput
+  company: CompanyUpdateOneWithoutSitesInput
+  category: CategoryUpdateManyWithoutSiteInput
+  team: TeamUpdateManyWithoutSiteInput
+  custom: CustomizeSiteUpdateOneInput
+}
+
+input SiteUpdateManyWithoutCompanyInput {
+  create: [SiteCreateWithoutCompanyInput!]
+  connect: [SiteWhereUniqueInput!]
+  disconnect: [SiteWhereUniqueInput!]
+  delete: [SiteWhereUniqueInput!]
+  update: [SiteUpdateWithWhereUniqueWithoutCompanyInput!]
+  upsert: [SiteUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input SiteUpdateOneWithoutCategoryInput {
+  create: SiteCreateWithoutCategoryInput
+  connect: SiteWhereUniqueInput
+  delete: Boolean
+  update: SiteUpdateWithoutCategoryDataInput
+  upsert: SiteUpsertWithoutCategoryInput
+}
+
+input SiteUpdateOneWithoutLocationInput {
+  create: SiteCreateWithoutLocationInput
+  connect: SiteWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SiteUpdateWithoutLocationDataInput
+  upsert: SiteUpsertWithoutLocationInput
+}
+
+input SiteUpdateOneWithoutSlugInput {
+  create: SiteCreateWithoutSlugInput
+  connect: SiteWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SiteUpdateWithoutSlugDataInput
+  upsert: SiteUpsertWithoutSlugInput
+}
+
+input SiteUpdateOneWithoutTeamInput {
+  create: SiteCreateWithoutTeamInput
+  connect: SiteWhereUniqueInput
+  delete: Boolean
+  update: SiteUpdateWithoutTeamDataInput
+  upsert: SiteUpsertWithoutTeamInput
+}
+
+input SiteUpdateWithoutCategoryDataInput {
+  name: String
+  location: LocationUpdateOneWithoutSiteInput
+  slug: SlugUpdateOneWithoutSiteInput
+  company: CompanyUpdateOneWithoutSitesInput
+  team: TeamUpdateManyWithoutSiteInput
+  custom: CustomizeSiteUpdateOneInput
+}
+
+input SiteUpdateWithoutCompanyDataInput {
+  name: String
+  location: LocationUpdateOneWithoutSiteInput
+  slug: SlugUpdateOneWithoutSiteInput
+  category: CategoryUpdateManyWithoutSiteInput
+  team: TeamUpdateManyWithoutSiteInput
+  custom: CustomizeSiteUpdateOneInput
+}
+
+input SiteUpdateWithoutLocationDataInput {
+  name: String
+  slug: SlugUpdateOneWithoutSiteInput
+  company: CompanyUpdateOneWithoutSitesInput
+  category: CategoryUpdateManyWithoutSiteInput
+  team: TeamUpdateManyWithoutSiteInput
+  custom: CustomizeSiteUpdateOneInput
+}
+
+input SiteUpdateWithoutSlugDataInput {
+  name: String
+  location: LocationUpdateOneWithoutSiteInput
+  company: CompanyUpdateOneWithoutSitesInput
+  category: CategoryUpdateManyWithoutSiteInput
+  team: TeamUpdateManyWithoutSiteInput
+  custom: CustomizeSiteUpdateOneInput
+}
+
+input SiteUpdateWithoutTeamDataInput {
+  name: String
+  location: LocationUpdateOneWithoutSiteInput
+  slug: SlugUpdateOneWithoutSiteInput
+  company: CompanyUpdateOneWithoutSitesInput
+  category: CategoryUpdateManyWithoutSiteInput
+  custom: CustomizeSiteUpdateOneInput
+}
+
+input SiteUpdateWithWhereUniqueWithoutCompanyInput {
+  where: SiteWhereUniqueInput!
+  data: SiteUpdateWithoutCompanyDataInput!
+}
+
+input SiteUpsertWithoutCategoryInput {
+  update: SiteUpdateWithoutCategoryDataInput!
+  create: SiteCreateWithoutCategoryInput!
+}
+
+input SiteUpsertWithoutLocationInput {
+  update: SiteUpdateWithoutLocationDataInput!
+  create: SiteCreateWithoutLocationInput!
+}
+
+input SiteUpsertWithoutSlugInput {
+  update: SiteUpdateWithoutSlugDataInput!
+  create: SiteCreateWithoutSlugInput!
+}
+
+input SiteUpsertWithoutTeamInput {
+  update: SiteUpdateWithoutTeamDataInput!
+  create: SiteCreateWithoutTeamInput!
+}
+
+input SiteUpsertWithWhereUniqueWithoutCompanyInput {
+  where: SiteWhereUniqueInput!
+  update: SiteUpdateWithoutCompanyDataInput!
+  create: SiteCreateWithoutCompanyInput!
+}
+
+input SiteWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SiteWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SiteWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SiteWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  location: LocationWhereInput
+  slug: SlugWhereInput
+  company: CompanyWhereInput
+  category_every: CategoryWhereInput
+  category_some: CategoryWhereInput
+  category_none: CategoryWhereInput
+  team_every: TeamWhereInput
+  team_some: TeamWhereInput
+  team_none: TeamWhereInput
+  custom: CustomizeSiteWhereInput
+}
+
+input SiteWhereUniqueInput {
+  id: ID
+}
+
+type Slug implements Node {
+  id: ID!
+  value: String!
+  company(where: CompanyWhereInput): Company
+  site(where: SiteWhereInput): Site
+  category(where: CategoryWhereInput): Category
+  productType(where: ProductTypeWhereInput): ProductType
+  product(where: ProductWhereInput): Product
+}
+
+"""A connection to a list of items."""
+type SlugConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SlugEdge]!
+  aggregate: AggregateSlug!
+}
+
+input SlugCreateInput {
+  value: String!
+  company: CompanyCreateOneWithoutSlugInput
+  site: SiteCreateOneWithoutSlugInput
+  category: CategoryCreateOneWithoutSlugInput
+  productType: ProductTypeCreateOneWithoutSlugInput
+  product: ProductCreateOneWithoutSlugInput
+}
+
+input SlugCreateOneWithoutCategoryInput {
+  create: SlugCreateWithoutCategoryInput
+  connect: SlugWhereUniqueInput
+}
+
+input SlugCreateOneWithoutCompanyInput {
+  create: SlugCreateWithoutCompanyInput
+  connect: SlugWhereUniqueInput
+}
+
+input SlugCreateOneWithoutProductInput {
+  create: SlugCreateWithoutProductInput
+  connect: SlugWhereUniqueInput
+}
+
+input SlugCreateOneWithoutProductTypeInput {
+  create: SlugCreateWithoutProductTypeInput
+  connect: SlugWhereUniqueInput
+}
+
+input SlugCreateOneWithoutSiteInput {
+  create: SlugCreateWithoutSiteInput
+  connect: SlugWhereUniqueInput
+}
+
+input SlugCreateWithoutCategoryInput {
+  value: String!
+  company: CompanyCreateOneWithoutSlugInput
+  site: SiteCreateOneWithoutSlugInput
+  productType: ProductTypeCreateOneWithoutSlugInput
+  product: ProductCreateOneWithoutSlugInput
+}
+
+input SlugCreateWithoutCompanyInput {
+  value: String!
+  site: SiteCreateOneWithoutSlugInput
+  category: CategoryCreateOneWithoutSlugInput
+  productType: ProductTypeCreateOneWithoutSlugInput
+  product: ProductCreateOneWithoutSlugInput
+}
+
+input SlugCreateWithoutProductInput {
+  value: String!
+  company: CompanyCreateOneWithoutSlugInput
+  site: SiteCreateOneWithoutSlugInput
+  category: CategoryCreateOneWithoutSlugInput
+  productType: ProductTypeCreateOneWithoutSlugInput
+}
+
+input SlugCreateWithoutProductTypeInput {
+  value: String!
+  company: CompanyCreateOneWithoutSlugInput
+  site: SiteCreateOneWithoutSlugInput
+  category: CategoryCreateOneWithoutSlugInput
+  product: ProductCreateOneWithoutSlugInput
+}
+
+input SlugCreateWithoutSiteInput {
+  value: String!
+  company: CompanyCreateOneWithoutSlugInput
+  category: CategoryCreateOneWithoutSlugInput
+  productType: ProductTypeCreateOneWithoutSlugInput
+  product: ProductCreateOneWithoutSlugInput
+}
+
+"""An edge in a connection."""
+type SlugEdge {
+  """The item at the end of the edge."""
+  node: Slug!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SlugOrderByInput {
+  id_ASC
+  id_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SlugPreviousValues {
+  id: ID!
+  value: String!
+}
+
+type SlugSubscriptionPayload {
+  mutation: MutationType!
+  node: Slug
+  updatedFields: [String!]
+  previousValues: SlugPreviousValues
+}
+
+input SlugSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SlugSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SlugSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SlugSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SlugWhereInput
+}
+
+input SlugUpdateInput {
+  value: String
+  company: CompanyUpdateOneWithoutSlugInput
+  site: SiteUpdateOneWithoutSlugInput
+  category: CategoryUpdateOneWithoutSlugInput
+  productType: ProductTypeUpdateOneWithoutSlugInput
+  product: ProductUpdateOneWithoutSlugInput
+}
+
+input SlugUpdateOneWithoutCategoryInput {
+  create: SlugCreateWithoutCategoryInput
+  connect: SlugWhereUniqueInput
+  delete: Boolean
+  update: SlugUpdateWithoutCategoryDataInput
+  upsert: SlugUpsertWithoutCategoryInput
+}
+
+input SlugUpdateOneWithoutCompanyInput {
+  create: SlugCreateWithoutCompanyInput
+  connect: SlugWhereUniqueInput
+  delete: Boolean
+  update: SlugUpdateWithoutCompanyDataInput
+  upsert: SlugUpsertWithoutCompanyInput
+}
+
+input SlugUpdateOneWithoutProductInput {
+  create: SlugCreateWithoutProductInput
+  connect: SlugWhereUniqueInput
+  delete: Boolean
+  update: SlugUpdateWithoutProductDataInput
+  upsert: SlugUpsertWithoutProductInput
+}
+
+input SlugUpdateOneWithoutProductTypeInput {
+  create: SlugCreateWithoutProductTypeInput
+  connect: SlugWhereUniqueInput
+  delete: Boolean
+  update: SlugUpdateWithoutProductTypeDataInput
+  upsert: SlugUpsertWithoutProductTypeInput
+}
+
+input SlugUpdateOneWithoutSiteInput {
+  create: SlugCreateWithoutSiteInput
+  connect: SlugWhereUniqueInput
+  delete: Boolean
+  update: SlugUpdateWithoutSiteDataInput
+  upsert: SlugUpsertWithoutSiteInput
+}
+
+input SlugUpdateWithoutCategoryDataInput {
+  value: String
+  company: CompanyUpdateOneWithoutSlugInput
+  site: SiteUpdateOneWithoutSlugInput
+  productType: ProductTypeUpdateOneWithoutSlugInput
+  product: ProductUpdateOneWithoutSlugInput
+}
+
+input SlugUpdateWithoutCompanyDataInput {
+  value: String
+  site: SiteUpdateOneWithoutSlugInput
+  category: CategoryUpdateOneWithoutSlugInput
+  productType: ProductTypeUpdateOneWithoutSlugInput
+  product: ProductUpdateOneWithoutSlugInput
+}
+
+input SlugUpdateWithoutProductDataInput {
+  value: String
+  company: CompanyUpdateOneWithoutSlugInput
+  site: SiteUpdateOneWithoutSlugInput
+  category: CategoryUpdateOneWithoutSlugInput
+  productType: ProductTypeUpdateOneWithoutSlugInput
+}
+
+input SlugUpdateWithoutProductTypeDataInput {
+  value: String
+  company: CompanyUpdateOneWithoutSlugInput
+  site: SiteUpdateOneWithoutSlugInput
+  category: CategoryUpdateOneWithoutSlugInput
+  product: ProductUpdateOneWithoutSlugInput
+}
+
+input SlugUpdateWithoutSiteDataInput {
+  value: String
+  company: CompanyUpdateOneWithoutSlugInput
+  category: CategoryUpdateOneWithoutSlugInput
+  productType: ProductTypeUpdateOneWithoutSlugInput
+  product: ProductUpdateOneWithoutSlugInput
+}
+
+input SlugUpsertWithoutCategoryInput {
+  update: SlugUpdateWithoutCategoryDataInput!
+  create: SlugCreateWithoutCategoryInput!
+}
+
+input SlugUpsertWithoutCompanyInput {
+  update: SlugUpdateWithoutCompanyDataInput!
+  create: SlugCreateWithoutCompanyInput!
+}
+
+input SlugUpsertWithoutProductInput {
+  update: SlugUpdateWithoutProductDataInput!
+  create: SlugCreateWithoutProductInput!
+}
+
+input SlugUpsertWithoutProductTypeInput {
+  update: SlugUpdateWithoutProductTypeDataInput!
+  create: SlugCreateWithoutProductTypeInput!
+}
+
+input SlugUpsertWithoutSiteInput {
+  update: SlugUpdateWithoutSiteDataInput!
+  create: SlugCreateWithoutSiteInput!
+}
+
+input SlugWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SlugWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SlugWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SlugWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  company: CompanyWhereInput
+  site: SiteWhereInput
+  category: CategoryWhereInput
+  productType: ProductTypeWhereInput
+  product: ProductWhereInput
+}
+
+input SlugWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  company(where: CompanySubscriptionWhereInput): CompanySubscriptionPayload
+  site(where: SiteSubscriptionWhereInput): SiteSubscriptionPayload
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
+  productType(where: ProductTypeSubscriptionWhereInput): ProductTypeSubscriptionPayload
+  product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
+  team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
+  pricing(where: PricingSubscriptionWhereInput): PricingSubscriptionPayload
+  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
+  gallery(where: GallerySubscriptionWhereInput): GallerySubscriptionPayload
+  slug(where: SlugSubscriptionWhereInput): SlugSubscriptionPayload
+  customizeSite(where: CustomizeSiteSubscriptionWhereInput): CustomizeSiteSubscriptionPayload
+  themeColor(where: ThemeColorSubscriptionWhereInput): ThemeColorSubscriptionPayload
+}
+
+type Team implements Node {
+  id: ID!
+  user(where: UserWhereInput): User!
+  site(where: SiteWhereInput): Site!
+  role: String!
+}
+
+"""A connection to a list of items."""
+type TeamConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TeamEdge]!
+  aggregate: AggregateTeam!
+}
+
+input TeamCreateInput {
+  role: String!
+  user: UserCreateOneWithoutTeamsInput!
+  site: SiteCreateOneWithoutTeamInput!
+}
+
+input TeamCreateManyWithoutSiteInput {
+  create: [TeamCreateWithoutSiteInput!]
+  connect: [TeamWhereUniqueInput!]
+}
+
+input TeamCreateManyWithoutUserInput {
+  create: [TeamCreateWithoutUserInput!]
+  connect: [TeamWhereUniqueInput!]
+}
+
+input TeamCreateWithoutSiteInput {
+  role: String!
+  user: UserCreateOneWithoutTeamsInput!
+}
+
+input TeamCreateWithoutUserInput {
+  role: String!
+  site: SiteCreateOneWithoutTeamInput!
+}
+
+"""An edge in a connection."""
+type TeamEdge {
+  """The item at the end of the edge."""
+  node: Team!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TeamOrderByInput {
+  id_ASC
+  id_DESC
+  role_ASC
+  role_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type TeamPreviousValues {
+  id: ID!
+  role: String!
+}
+
+type TeamSubscriptionPayload {
+  mutation: MutationType!
+  node: Team
+  updatedFields: [String!]
+  previousValues: TeamPreviousValues
+}
+
+input TeamSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TeamSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TeamSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TeamSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TeamWhereInput
+}
+
+input TeamUpdateInput {
+  role: String
+  user: UserUpdateOneWithoutTeamsInput
+  site: SiteUpdateOneWithoutTeamInput
+}
+
+input TeamUpdateManyWithoutSiteInput {
+  create: [TeamCreateWithoutSiteInput!]
+  connect: [TeamWhereUniqueInput!]
+  disconnect: [TeamWhereUniqueInput!]
+  delete: [TeamWhereUniqueInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutSiteInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutSiteInput!]
+}
+
+input TeamUpdateManyWithoutUserInput {
+  create: [TeamCreateWithoutUserInput!]
+  connect: [TeamWhereUniqueInput!]
+  disconnect: [TeamWhereUniqueInput!]
+  delete: [TeamWhereUniqueInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input TeamUpdateWithoutSiteDataInput {
+  role: String
+  user: UserUpdateOneWithoutTeamsInput
+}
+
+input TeamUpdateWithoutUserDataInput {
+  role: String
+  site: SiteUpdateOneWithoutTeamInput
+}
+
+input TeamUpdateWithWhereUniqueWithoutSiteInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateWithoutSiteDataInput!
+}
+
+input TeamUpdateWithWhereUniqueWithoutUserInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateWithoutUserDataInput!
+}
+
+input TeamUpsertWithWhereUniqueWithoutSiteInput {
+  where: TeamWhereUniqueInput!
+  update: TeamUpdateWithoutSiteDataInput!
+  create: TeamCreateWithoutSiteInput!
+}
+
+input TeamUpsertWithWhereUniqueWithoutUserInput {
+  where: TeamWhereUniqueInput!
+  update: TeamUpdateWithoutUserDataInput!
+  create: TeamCreateWithoutUserInput!
+}
+
+input TeamWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TeamWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TeamWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TeamWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  role: String
+
+  """All values that are not equal to given value."""
+  role_not: String
+
+  """All values that are contained in given list."""
+  role_in: [String!]
+
+  """All values that are not contained in given list."""
+  role_not_in: [String!]
+
+  """All values less than the given value."""
+  role_lt: String
+
+  """All values less than or equal the given value."""
+  role_lte: String
+
+  """All values greater than the given value."""
+  role_gt: String
+
+  """All values greater than or equal the given value."""
+  role_gte: String
+
+  """All values containing the given string."""
+  role_contains: String
+
+  """All values not containing the given string."""
+  role_not_contains: String
+
+  """All values starting with the given string."""
+  role_starts_with: String
+
+  """All values not starting with the given string."""
+  role_not_starts_with: String
+
+  """All values ending with the given string."""
+  role_ends_with: String
+
+  """All values not ending with the given string."""
+  role_not_ends_with: String
+  user: UserWhereInput
+  site: SiteWhereInput
+}
+
+input TeamWhereUniqueInput {
+  id: ID
+}
+
+type ThemeColor {
+  color: String!
+  shade: String!
+}
+
+"""A connection to a list of items."""
+type ThemeColorConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ThemeColorEdge]!
+  aggregate: AggregateThemeColor!
+}
+
+input ThemeColorCreateInput {
+  color: String!
+  shade: String!
+}
+
+input ThemeColorCreateOneInput {
+  create: ThemeColorCreateInput
+}
+
+"""An edge in a connection."""
+type ThemeColorEdge {
+  """The item at the end of the edge."""
+  node: ThemeColor!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ThemeColorOrderByInput {
+  color_ASC
+  color_DESC
+  shade_ASC
+  shade_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ThemeColorPreviousValues {
+  color: String!
+  shade: String!
+}
+
+type ThemeColorSubscriptionPayload {
+  mutation: MutationType!
+  node: ThemeColor
+  updatedFields: [String!]
+  previousValues: ThemeColorPreviousValues
+}
+
+input ThemeColorSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThemeColorSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThemeColorSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThemeColorSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ThemeColorWhereInput
+}
+
+input ThemeColorUpdateDataInput {
+  color: String
+  shade: String
+}
+
+input ThemeColorUpdateInput {
+  color: String
+  shade: String
+}
+
+input ThemeColorUpdateOneInput {
+  create: ThemeColorCreateInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ThemeColorUpdateDataInput
+  upsert: ThemeColorUpsertNestedInput
+}
+
+input ThemeColorUpsertNestedInput {
+  update: ThemeColorUpdateDataInput!
+  create: ThemeColorCreateInput!
+}
+
+input ThemeColorWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ThemeColorWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ThemeColorWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ThemeColorWhereInput!]
+  color: String
+
+  """All values that are not equal to given value."""
+  color_not: String
+
+  """All values that are contained in given list."""
+  color_in: [String!]
+
+  """All values that are not contained in given list."""
+  color_not_in: [String!]
+
+  """All values less than the given value."""
+  color_lt: String
+
+  """All values less than or equal the given value."""
+  color_lte: String
+
+  """All values greater than the given value."""
+  color_gt: String
+
+  """All values greater than or equal the given value."""
+  color_gte: String
+
+  """All values containing the given string."""
+  color_contains: String
+
+  """All values not containing the given string."""
+  color_not_contains: String
+
+  """All values starting with the given string."""
+  color_starts_with: String
+
+  """All values not starting with the given string."""
+  color_not_starts_with: String
+
+  """All values ending with the given string."""
+  color_ends_with: String
+
+  """All values not ending with the given string."""
+  color_not_ends_with: String
+  shade: String
+
+  """All values that are not equal to given value."""
+  shade_not: String
+
+  """All values that are contained in given list."""
+  shade_in: [String!]
+
+  """All values that are not contained in given list."""
+  shade_not_in: [String!]
+
+  """All values less than the given value."""
+  shade_lt: String
+
+  """All values less than or equal the given value."""
+  shade_lte: String
+
+  """All values greater than the given value."""
+  shade_gt: String
+
+  """All values greater than or equal the given value."""
+  shade_gte: String
+
+  """All values containing the given string."""
+  shade_contains: String
+
+  """All values not containing the given string."""
+  shade_not_contains: String
+
+  """All values starting with the given string."""
+  shade_starts_with: String
+
+  """All values not starting with the given string."""
+  shade_not_starts_with: String
+
+  """All values ending with the given string."""
+  shade_ends_with: String
+
+  """All values not ending with the given string."""
+  shade_not_ends_with: String
+}
+
+type User implements Node {
+  id: ID!
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  teams: TeamCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutTeamsInput {
+  create: UserCreateWithoutTeamsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTeamsInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  email: String
+  password: String
+  firstName: String
+  lastName: String
+  teams: TeamUpdateManyWithoutUserInput
+}
+
+input UserUpdateOneWithoutTeamsInput {
+  create: UserCreateWithoutTeamsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutTeamsDataInput
+  upsert: UserUpsertWithoutTeamsInput
+}
+
+input UserUpdateWithoutTeamsDataInput {
+  email: String
+  password: String
+  firstName: String
+  lastName: String
+}
+
+input UserUpsertWithoutTeamsInput {
+  update: UserUpdateWithoutTeamsDataInput!
+  create: UserCreateWithoutTeamsInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  firstName: String
+
+  """All values that are not equal to given value."""
+  firstName_not: String
+
+  """All values that are contained in given list."""
+  firstName_in: [String!]
+
+  """All values that are not contained in given list."""
+  firstName_not_in: [String!]
+
+  """All values less than the given value."""
+  firstName_lt: String
+
+  """All values less than or equal the given value."""
+  firstName_lte: String
+
+  """All values greater than the given value."""
+  firstName_gt: String
+
+  """All values greater than or equal the given value."""
+  firstName_gte: String
+
+  """All values containing the given string."""
+  firstName_contains: String
+
+  """All values not containing the given string."""
+  firstName_not_contains: String
+
+  """All values starting with the given string."""
+  firstName_starts_with: String
+
+  """All values not starting with the given string."""
+  firstName_not_starts_with: String
+
+  """All values ending with the given string."""
+  firstName_ends_with: String
+
+  """All values not ending with the given string."""
+  firstName_not_ends_with: String
+  lastName: String
+
+  """All values that are not equal to given value."""
+  lastName_not: String
+
+  """All values that are contained in given list."""
+  lastName_in: [String!]
+
+  """All values that are not contained in given list."""
+  lastName_not_in: [String!]
+
+  """All values less than the given value."""
+  lastName_lt: String
+
+  """All values less than or equal the given value."""
+  lastName_lte: String
+
+  """All values greater than the given value."""
+  lastName_gt: String
+
+  """All values greater than or equal the given value."""
+  lastName_gte: String
+
+  """All values containing the given string."""
+  lastName_contains: String
+
+  """All values not containing the given string."""
+  lastName_not_contains: String
+
+  """All values starting with the given string."""
+  lastName_starts_with: String
+
+  """All values not starting with the given string."""
+  lastName_not_starts_with: String
+
+  """All values ending with the given string."""
+  lastName_ends_with: String
+
+  """All values not ending with the given string."""
+  lastName_not_ends_with: String
+  teams_every: TeamWhereInput
+  teams_some: TeamWhereInput
+  teams_none: TeamWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}

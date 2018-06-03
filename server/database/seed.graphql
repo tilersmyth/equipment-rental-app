@@ -1,0 +1,275 @@
+mutation {
+  firstSite: createSite(
+    data: {
+      name: "KR - Kittery, ME"
+      location: {
+        create: {
+          lat: 43.108222
+          lng: -70.749831
+          address: "11 ME-236, Kittery, ME 03904"
+        }
+      }
+      slug: { create: { value: "kr-kittery-me" } }
+      company: {
+        create: {
+          name: "Kennebec Equipment Rental"
+          slug: { create: { value: "kennebec-equipment-rental" } }
+        }
+      }
+      category: {
+        create: [
+          {
+            name: "Air Compressors Air Tools"
+            description: "From portable and towable air compressors, to air drills, air staplers, and air hammers"
+            slug: { create: { value: "air-compressors-air-tools" } }
+            productType: {
+              create: [
+                {
+                  name: "Air Compressors"
+                  description: "Towable Air Compressors provide efficiency, economy and productivity. Larger compressors in the 1300 to 1800 cfm range are ideal for industrial, construction, and mining applications. Smaller portable air compressors are ideal for compact jobsites."
+                  slug: { create: { value: "air-compressors" } }
+                  image: {
+                    create: {
+                      url: "http://tyler.local/~tylersmith/rent_images/types/air_compressors.jpg"
+                    }
+                  }
+                  featured: true
+                  products: {
+                    create: {
+                      name: "Air Chipping Gun"
+                      shortDescription: "They have the ability to perform all types of medium to heavy demolition work."
+                      longDescription: "They have the ability to perform all types of medium to heavy demolition work. With half the weight of the 60 lb. class paving breakers, the ratio of their high impact energy versus their weight make them the most efficient tool APT makes."
+                      featuredImage: {
+                        create: {
+                          url: "https://a0.muscache.com/im/pictures/45880516/93bb5931_original.jpg?aki_policy=xx_large"
+                        }
+                      }
+                      slug: { create: { value: "air-chipping-gun" } }
+                      pricing: {
+                        create: {
+                          rangePricing: false
+                          day: 1
+                          week: 2
+                          month: 3
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+          {
+            name: "Forklifts & Material Handling"
+            description: "Our full fleet of forklifts, cranes and hoists provide ample strength, lift height, versatility, and the performance features needed for most applications. From reach forklifts to warehouse forklifts or rough terrain lifts – you can rely on our top-tier material handling equipment.   Whether you need to move or lift material - on solid ground or mud, rocks, hillsides, and other rough terrain - we have the reliable and rugged equipment to help you get your construction or industrial job done right."
+            slug: { create: { value: "forklifts-material-handling" } }
+            productType: {
+              create: [
+                {
+                  name: "Reach Forklifts"
+                  description: "Reach forklifts are rough-terrain, telescoping boom forklifts that provide ample strength, lift height and versatile performance features for a variety of applications. Their low-profile design allows them to fit under standard 9’ doorways. Many units have mid-mounted engines and long wheelbases for greater mobility in mud and on rocks, rough terrain and hillsides."
+                  slug: { create: { value: "reach-forklifts" } }
+                  image: {
+                    create: {
+                      url: "http://tyler.local/~tylersmith/rent_images/types/reach_forklifts.jpg"
+                    }
+                  }
+                  featured: true
+                  products: {
+                    create: {
+                      name: "Variable Reach Forklift, 12,000 lbs., 50-56'"
+                      shortDescription: "Gradall material handlers feature unique 90° rear pivot steering for a tighter turning radius."
+                      longDescription: "Gradall material handlers feature unique 90° rear pivot steering for a tighter turning radius. Hydrostatic drive provides simple, no-shift operation at any speed including 4-wheel inching."
+                      featuredImage: {
+                        create: {
+                          url: "https://a0.muscache.com/im/pictures/45880516/93bb5931_original.jpg?aki_policy=xx_large"
+                        }
+                      }
+                      slug: { create: { value: "variable-reach-forklift" } }
+                      pricing: {
+                        create: {
+                          rangePricing: false
+                          day: 1
+                          week: 2
+                          month: 3
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+          {
+            name: "Earthmoving Equipment"
+            description: "From digging out a trench, to loading, backfilling, grading, raking or sweeping – our full line of top-tier earthmoving equipment has the performance and versatility to get the job done. Our fleet includes backhoe loaders, excavators, skid steer loaders, wheel loaders, dozers, ride-on sweepers & trenchers, and the coordinating earthmoving attachments vital for any large excavating job."
+            slug: { create: { value: "earthmoving-equipment" } }
+            productType: {
+              create: [
+                {
+                  name: "Skid Steers & Track Loaders"
+                  description: "Skid Steer Track Loaders provide optimal power and performance on small-to-medium jobs where space is a consideration. These bobcats are great for digging, grading, and leveling. With a variety of attachments such as tires or tracks, you can travel on soft and sandy surfaces, through rough terrain and on wet or muddy areas. Whether you’re breaking ground on a construction site, paving a new dirt path, or transporting heavy loads around the jobsite – we have a skid steer track loader to fit your needs."
+                  slug: { create: { value: "skid-steers" } }
+                  image: {
+                    create: {
+                      url: "http://tyler.local/~tylersmith/rent_images/types/skid-steers.jpg"
+                    }
+                  }
+                  featured: true
+                  products: {
+                    create: {
+                      name: "Track Loader, 1300-1699 lbs."
+                      shortDescription: "Compact Track Loader, Bobcat"
+                      longDescription: "Compact Track Loader, Bobcat"
+                      featuredImage: {
+                        create: {
+                          url: "https://a0.muscache.com/im/pictures/45880516/93bb5931_original.jpg?aki_policy=xx_large"
+                        }
+                      }
+                      slug: { create: { value: "track-loader" } }
+                      pricing: {
+                        create: {
+                          rangePricing: false
+                          day: 1
+                          week: 2
+                          month: 3
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+          {
+            name: "Aerial Work Platforms"
+            description: "We offer the largest rental equipment fleet in the world - with an aerial fleet that includes personnel lifts, scissor lifts for indoor or outdoor applications, boom lifts for straight reach jobs, or articulating (knuckle) boom lifts for spots that aren’t easily accessible – all sourced from top-tier equipment manufacturers. Our gas and diesel aerial work platforms are built to navigate difficult outdoor job site terrain, while our electric and propane aerial lifts easily maneuver through indoor environments with clean, fume-free operation."
+            slug: { create: { value: "aerial-work-platforms" } }
+            productType: {
+              create: [
+                {
+                  name: "Boom Lifts"
+                  description: "Boom lifts come in two designs: Articulating (Knuckle) booms, and Telescopic (Straight) booms."
+                  slug: { create: { value: "boom-lifts" } }
+                  featured: true
+                  image: {
+                    create: {
+                      url: "http://tyler.local/~tylersmith/rent_images/types/boom_lift.jpg"
+                    }
+                  }
+                  products: {
+                    create: {
+                      name: "Straight Boom Lift, 45-47', 4WD"
+                      shortDescription: "360° platform rotation for easy boom positioning and self-leveling platforms are standard."
+                      longDescription: "Boom lifts can be raised, lowered, and extended horizontally while the work platform remains straight and stable. You can maneuver and steer in any direction, even while the platform is extended. Both 2WD and 4WD models are available to suit your site conditions."
+                      featuredImage: {
+                        create: {
+                          url: "https://a0.muscache.com/im/pictures/45880516/93bb5931_original.jpg?aki_policy=xx_large"
+                        }
+                      }
+                      slug: { create: { value: "straight-boom-lift" } }
+                      pricing: {
+                        create: {
+                          rangePricing: false
+                          day: 1
+                          week: 2
+                          month: 3
+                        }
+                      }
+                    }
+                  }
+                }
+                {
+                  name: "Scissor Lifts"
+                  description: "Scissor lifts come in two main types: Electric Scissor Lifts, used primarily for indoor applications, and Rough Terrain Scissor Lifts, used outdoors to navigate uneven or unstable terrain."
+                  slug: { create: { value: "scissor-lifts" } }
+                  featured: true
+                  image: {
+                    create: {
+                      url: "http://tyler.local/~tylersmith/rent_images/types/scissor_lifts.jpg"
+                    }
+                  }
+                  products: {
+                    create: {
+                      name: "Electric Scissor Lift, 10-13'"
+                      shortDescription: "We carry a complete range of Hy-Brid Lifts suitable for construction, industrial maintenance, and warehouse applications on smooth slab surfaces."
+                      longDescription: "All models are designed compact and lightweight with the end user in mind to improve productivity, increase safety, and go where conventional scissor lifts can’t."
+                      featuredImage: {
+                        create: {
+                          url: "https://a0.muscache.com/im/pictures/45880516/93bb5931_original.jpg?aki_policy=xx_large"
+                        }
+                      }
+                      slug: { create: { value: "electric-scissor-lifts" } }
+                      pricing: {
+                        create: {
+                          rangePricing: false
+                          day: 1
+                          week: 2
+                          month: 3
+                        }
+                      }
+                    }
+                  }
+                }
+                {
+                  name: "Vertical Lifts"
+                  description: "We offer the largest rental equipment fleet in the world - with an aerial fleet that includes personnel lifts, scissor lifts for indoor or outdoor applications, boom lifts for straight reach jobs, or articulating (knuckle) boom lifts for spots that aren’t easily accessible – all sourced from top-tier equipment manufacturers. Our gas and diesel aerial work platforms are built to navigate difficult outdoor job site terrain, while our electric and propane aerial lifts easily maneuver through indoor environments with clean, fume-free operation. Whether you’re a service professional doing indoor repairs and maintenance at thirty feet, or a contractor completing a new construction fabrication at 150 feet - we have the aerial lift equipment for rent or for sale to fit your project needs."
+                  slug: { create: { value: "vertical-lifts" } }
+                  featured: true
+                  image: {
+                    create: {
+                      url: "http://tyler.local/~tylersmith/rent_images/types/vertical_lifts.jpg"
+                    }
+                  }
+                  products: {
+                    create: {
+                      name: "Vertical Mast Lift, 20', Electric, Self Propelled"
+                      shortDescription: "Whether you’ve got work to do in factories, retail centers, airports or public buildings, Mobile Vertical Lifts keep you on the job longer."
+                      longDescription: "Whether you’ve got work to do in factories, retail centers, airports or public buildings, Mobile Vertical Lifts keep you on the job longer. A pair of reliable direct electric drive motors deliver power while maintenance-free long cycle batteries hold their charge. The built-in automatic charger has a five-hour recharge capability. Three platform options with exclusive one minute quick-change mountings let you get maintenance jobs done efficiently."
+                      featuredImage: {
+                        create: {
+                          url: "https://a0.muscache.com/im/pictures/45880516/93bb5931_original.jpg?aki_policy=xx_large"
+                        }
+                      }
+                      slug: { create: { value: "vertical-mass-lift" } }
+                      pricing: {
+                        create: {
+                          rangePricing: false
+                          day: 1
+                          week: 2
+                          month: 3
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+      team: {
+        create: {
+          user: {
+            create: {
+              email: "bob@kr.com"
+              password: "admin"
+              firstName: "bob"
+              lastName: "smith"
+            }
+          }
+          role: "owner"
+        }
+      }
+      custom: {
+        create: {
+          headerImage: "http://tyler.local/~tylersmith/rent_images/rental2.jpg"
+          headerText: "Browse Equipment & Tool Rentals"
+          theme: { create: { color: "blue", shade: "500" } }
+        }
+      }
+    }
+  ) {
+    id
+  }
+}
