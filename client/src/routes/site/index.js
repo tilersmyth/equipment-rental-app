@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch, Redirect } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -12,11 +13,12 @@ const Routes = ({ data: { loading, slug }, match: { path } }) => {
     return null;
   }
   return (
-    <div>
+    <Switch>
       <SiteRoute path={`${path}`} exact slug={slug} component={Home} />
       <SiteRoute path={`${path}/login`} exact slug={slug} component={Login} />
       <SiteRoute path={`${path}/signup`} exact slug={slug} component={Signup} />
-    </div>
+      <SiteRoute render={() => <Redirect to="/error" />} />
+    </Switch>
   );
 };
 
