@@ -1,0 +1,15 @@
+# import Company, Site, Category, ProductType from "../shared.graphql"
+
+type Query {
+  allSites: [Site!]!
+  slug(value: String!): Slug
+}
+
+type Slug {
+  id: ID!
+  value: String!
+  company: Company
+  site: Site
+  category: Category
+  productType: ProductType
+}

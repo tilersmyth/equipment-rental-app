@@ -1,22 +1,3 @@
-type Query {
-  me: User
-  users: [User!]!
-  site(id: ID!): Site
-  slug(value: String!): Slug
-  allSites: [Site!]!
-  companies: [Company!]!
-  company(id: ID!): Company!
-  cats(id: ID!): [Category!]!
-  allTypes: [ProductType!]!
-  featured(id: ID!): [ProductType!]!
-  teams(id: ID!): [Team!]!
-}
-
-type Mutation {
-  signup(email: String!, password: String!, name: String!): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
-}
-
 type AuthPayload {
   token: String!
   user: User!
@@ -55,22 +36,6 @@ type ProductType {
   name: String!
   description: String!
   image: Image!
-}
-
-type Team {
-  id: ID!
-  user: User!
-  site: Site!
-  role: String!
-}
-
-type Slug {
-  id: ID!
-  value: String!
-  company: Company
-  site: Site
-  category: Category
-  productType: ProductType
 }
 
 type Image {

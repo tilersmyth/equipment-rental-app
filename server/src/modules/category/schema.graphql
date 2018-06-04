@@ -1,0 +1,5 @@
+# import Category from "../shared.graphql"
+
+type Query {
+  cats(id: ID!): [Category!]!
+}

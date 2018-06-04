@@ -1,0 +1,5 @@
+# import ProductType from "../shared.graphql"
+
+type Query {
+  featured(id: ID!): [ProductType!]!
+}
