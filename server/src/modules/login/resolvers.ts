@@ -3,6 +3,10 @@ import * as jwt from "jsonwebtoken";
 import { Context } from "../../types/graphql-utils";
 
 export const resolvers = {
+  Query: {
+    // hack for issue: https://github.com/apollographql/graphql-tools/issues/764
+    dummy: () => "dummy"
+  },
   Mutation: {
     async login(parent, { email, password }, ctx: Context, info) {
       const user = await ctx.db.query.user({ where: { email } });

@@ -3,6 +3,10 @@ import * as jwt from "jsonwebtoken";
 import { Context } from "../../types/graphql-utils";
 
 export const resolvers = {
+  Query: {
+    // hack for issue: https://github.com/apollographql/graphql-tools/issues/764
+    dummy: () => "dummy"
+  },
   Mutation: {
     async signup(parent, args, ctx: Context, info) {
       const password = await bcrypt.hash(args.password, 10);

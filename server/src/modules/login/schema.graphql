@@ -1,5 +1,9 @@
 # import AuthPayload from "../shared.graphql"
 
+type Query {
+  dummy: String
+}
+
 type Mutation {
   login(email: String!, password: String!): AuthPayload!
 }
