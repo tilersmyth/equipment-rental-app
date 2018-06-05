@@ -3,6 +3,7 @@ import * as jwt from "jsonwebtoken";
 import { Context } from "../types/graphql-utils";
 
 export function getUserId(ctx: Context) {
+  console.log("GET CURRENT USER");
   const Authorization = ctx.request.get("Authorization");
   if (Authorization) {
     const token = Authorization.replace("Bearer ", "");

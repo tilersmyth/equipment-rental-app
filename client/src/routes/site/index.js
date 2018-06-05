@@ -8,10 +8,11 @@ import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 
-const Routes = ({ data: { loading, slug }, match: { path } }) => {
+const Routes = ({ user, data: { loading, slug }, match: { path } }) => {
   if (loading) {
     return null;
   }
+  console.log(user);
   return (
     <Switch>
       <SiteRoute path={`${path}`} exact slug={slug} component={Home} />

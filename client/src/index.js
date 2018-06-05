@@ -6,31 +6,19 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import registerServiceWorker from './registerServiceWorker';
 import Routes from './routes';
+import { AUTH_TOKEN } from './constant';
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
-  // add the authorization to the headers
+  const tokenValue = localStorage.getItem(AUTH_TOKEN);
   operation.setContext({
     headers: {
-      'x-token': localStorage.getItem('token') || null,
+      Authorization: tokenValue ? `Bearer ${tokenValue}` : '',
     },
   });
 
-  return forward(operation).map((response) => {
-    const context = operation.getContext();
-    const {
-      response: { headers },
-    } = context;
-
-    if (headers) {
-      const token = headers.get('x-token');
-      if (token) {
-        localStorage.setItem('token', token);
-      }
-    }
-    return response;
-  });
+  return forward(operation);
 });
 
 const client = new ApolloClient({
