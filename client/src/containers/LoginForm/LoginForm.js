@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { extendObservable } from 'mobx';
-import { observer } from 'mobx-react';
+import { Form, Field } from 'react-final-form';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
@@ -30,27 +29,27 @@ const styles = theme => ({
   },
 });
 
+const input = ({
+  input: {
+    name, onChange, value, ...restInput
+  }, meta, ...rest
+}) => (
+  <Input
+    {...rest}
+    name={name}
+    error={meta.error && meta.touched}
+    inputProps={restInput}
+    onChange={onChange}
+    value={value}
+  />
+);
+
 class LoginFormContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    extendObservable(this, {
-      email: '',
-      password: '',
-      errors: {},
-    });
-  }
-
-  onSubmit = async () => {
-    const { email, password } = this;
-
+  onSubmit = async (values) => {
     const { slug, history } = this.props;
 
     const response = await this.props.mutate({
-      variables: {
-        email,
-        password,
-      },
+      variables: values,
     });
 
     const {
@@ -62,51 +61,31 @@ class LoginFormContainer extends React.Component {
     history.push(`/${slug}`);
   };
 
-  onChange = (e) => {
-    const { name, value } = e.target;
-    this[name] = value;
-  };
-
   render() {
-    const {
-      classes, slug, email, password,
-    } = this.props;
+    const { classes, slug } = this.props;
 
     return (
       <Grid container justify="center">
-        <Grid item xs={4}>
+        <Grid item xs={12} md={8} lg={4}>
           <Paper className={classes.paper}>
-            <form>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="email">E-mail Address</InputLabel>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  onChange={this.onChange}
-                  value={email}
-                />
-              </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  onChange={this.onChange}
-                  value={password}
-                />
-              </FormControl>
-              <Button
-                onClick={this.onSubmit}
-                fullWidth
-                variant="raised"
-                color="primary"
-                className={classes.button}
-              >
-                Login
-              </Button>
-            </form>
+            <Form
+              onSubmit={this.onSubmit}
+              render={({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="email">E-mail Address</InputLabel>
+                    <Field name="email" component={input} type="email" />
+                  </FormControl>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Field name="password" component={input} type="password" />
+                  </FormControl>
+                  <Button type="submit" fullWidth variant="raised" color="primary">
+                    Login
+                  </Button>
+                </form>
+              )}
+            />
           </Paper>
           <Button color="primary" component={Link} to={`/${slug}/signup`}>
             Need an account? Signup here
@@ -122,12 +101,15 @@ const LoginMutation = gql`
     login(email: $email, password: $password) {
       user {
         id
+        firstName
+        lastName
+        email
       }
       token
     }
   }
 `;
 
-const loginWithData = graphql(LoginMutation)(observer(LoginFormContainer));
+const loginWithData = graphql(LoginMutation)(LoginFormContainer);
 
 export default withRouter(withStyles(styles)(loginWithData));

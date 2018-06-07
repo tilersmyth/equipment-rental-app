@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { extendObservable } from 'mobx';
-import { observer } from 'mobx-react';
+import { Form, Field } from 'react-final-form';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+
+import { AUTH_TOKEN } from '../../constant';
 
 const styles = theme => ({
   paper: {
@@ -28,100 +29,74 @@ const styles = theme => ({
   },
 });
 
+const input = ({
+  input: {
+    name, onChange, value, ...restInput
+  }, meta, ...rest
+}) => (
+  <Input
+    {...rest}
+    name={name}
+    error={meta.error && meta.touched}
+    inputProps={restInput}
+    onChange={onChange}
+    value={value}
+  />
+);
+
 class SignupFormContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    extendObservable(this, {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      errors: {},
-    });
-  }
-
-  onSubmit = async (slug, history) => {
-    const {
-      firstName, lastName, email, password,
-    } = this;
+  onSubmit = async (values) => {
+    const { slug, history } = this.props;
 
     const response = await this.props.mutate({
-      variables: {
-        firstName,
-        lastName,
-        email,
-        password,
-      },
+      variables: values,
     });
 
     const {
       signup: { token },
     } = response.data;
 
-    localStorage.setItem('token', token);
+    localStorage.setItem(AUTH_TOKEN, token);
 
     history.push(`/${slug}`);
   };
 
-  onChange = (e) => {
-    const { name, value } = e.target;
-    this[name] = value;
-  };
-
   render() {
-    const {
-      classes, history, slug, firstName, lastName, email, password,
-    } = this.props;
+    const { classes, slug } = this.props;
 
     return (
       <Grid container justify="center">
-        <Grid item xs={4}>
+        <Grid item xs={12} md={8} lg={4}>
           <Paper className={classes.paper}>
-            <form>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="firstName">First Name</InputLabel>
-                <Input id="firstName" name="firstName" onChange={this.onChange} value={firstName} />
-              </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="lastName">Last Name</InputLabel>
-                <Input id="lastName" name="lastName" onChange={this.onChange} value={lastName} />
-              </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="email">E-mail Address</InputLabel>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  onChange={this.onChange}
-                  value={email}
-                />
-              </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  onChange={this.onChange}
-                  value={password}
-                />
-              </FormControl>
-              <Button
-                onClick={() => {
-                  this.onSubmit(slug, history);
-                }}
-                fullWidth
-                variant="raised"
-                color="primary"
-                className={classes.button}
-              >
-                Create account
-              </Button>
-            </form>
+            <Form
+              onSubmit={this.onSubmit}
+              render={({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="firstName">First Name</InputLabel>
+                    <Field name="firstName" component={input} type="text" />
+                  </FormControl>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="lastName">Last Name</InputLabel>
+                    <Field name="lastName" component={input} type="text" />
+                  </FormControl>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="email">E-mail Address</InputLabel>
+                    <Field name="email" component={input} type="email" />
+                  </FormControl>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Field name="password" component={input} type="password" />
+                  </FormControl>
+                  <Button type="submit" fullWidth variant="raised" color="primary">
+                    Login
+                  </Button>
+                </form>
+              )}
+            />
           </Paper>
-          <Button color="primary" component={Link} to={`/${slug}/login`}>
-            Already have an account? Login here
+          <Button color="primary" component={Link} to={`/${slug}/signup`}>
+            Need an account? Signup here
           </Button>
         </Grid>
       </Grid>
@@ -139,7 +114,6 @@ const SignupMutation = gql`
     }
   }
 `;
-
-const signupWithData = graphql(SignupMutation)(observer(SignupFormContainer));
+const signupWithData = graphql(SignupMutation)(SignupFormContainer);
 
 export default withRouter(withStyles(styles)(signupWithData));

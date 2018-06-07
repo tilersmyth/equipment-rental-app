@@ -33,6 +33,7 @@ const Login = ({ slug }) => {
           </Button>
           <Action />
         </Toolbar>
+
         <HeaderText text="Login" />
       </Header>
       <Content>

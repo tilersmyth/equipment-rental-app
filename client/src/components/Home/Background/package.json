@@ -1,6 +1,0 @@
-{
-  "name": "HomeHeaderBackground",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./Background.js"
-}
