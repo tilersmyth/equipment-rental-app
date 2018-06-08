@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import Slider from 'react-slick';
 import chunk from 'lodash/chunk';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -89,6 +90,7 @@ class CarouselContainer extends React.Component {
   render() {
     const {
       classes,
+      site,
       data: { loading, featured },
     } = this.props;
 
@@ -129,7 +131,15 @@ class CarouselContainer extends React.Component {
                         <Typography variant="title">{type.name}</Typography>
                       </CardContent>
                       <CardActions className={classes.cardActions}>
-                        <Button color="primary" size="small" className={classes.button}>
+                        <Button
+                          color="primary"
+                          size="small"
+                          className={classes.button}
+                          component={Link}
+                          to={`/${site.slug.value}/equipment/${type.category.slug.value}/${
+                            type.slug.value
+                          }`}
+                        >
                           {`View ${type.name}`}
                         </Button>
                       </CardActions>
@@ -153,12 +163,20 @@ const catsQuery = gql`
       image {
         url
       }
+      slug {
+        value
+      }
+      category {
+        slug {
+          value
+        }
+      }
     }
   }
 `;
 
 const CarouselData = graphql(catsQuery, {
-  options: props => ({ variables: { id: props.siteId } }),
+  options: props => ({ variables: { id: props.site.id } }),
 })(CarouselContainer);
 
 export default withStyles(styles)(CarouselData);

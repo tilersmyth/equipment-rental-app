@@ -17,7 +17,7 @@ const AuthRoute = ({
 
   return (
     <StateProvider inject={[user]}>
-      <Route {...rest} render={props => <Component slug={slug} {...props} />} />
+      <Route {...rest} render={props => <Component siteSlug={slug} {...props} />} />
     </StateProvider>
   );
 };

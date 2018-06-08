@@ -27,6 +27,7 @@ type Site {
 type Category {
   id: ID!
   name: String!
+  slug: Slug!
   description: String!
   productType: [ProductType!]!
 }
@@ -36,6 +37,31 @@ type ProductType {
   name: String!
   description: String!
   image: Image!
+  slug: Slug!
+  products: [Product!]!
+  category: Category!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  shortDescription: String!
+  longDescription: String!
+  featuredImage: Image!
+  slug: Slug!
+  gallery: [Gallery!]!
+  pricing: Pricing!
+  type: ProductType!
+}
+
+type Slug {
+  id: ID!
+  value: String!
+  company: Company
+  site: Site
+  category: Category
+  productType: ProductType
+  product: Product
 }
 
 type Image {
@@ -51,4 +77,17 @@ type CustomizeSite {
 type ThemeColor {
   color: String!
   shade: String!
+}
+
+type Gallery {
+  url: String!
+}
+
+type Pricing {
+  id: ID!
+  product: Product!
+  rangePricing: Boolean!
+  day: Int!
+  week: Int!
+  month: Int!
 }

@@ -3,10 +3,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 
-const styles = () => ({
+const styles = theme => ({
   inner: {
-    width: 300,
+    width: 350,
     padding: 10,
+  },
+  [theme.breakpoints.up('sm')]: {
+    inner: {
+      width: 400,
+    },
   },
 });
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -35,6 +36,7 @@ class CatListContainer extends React.Component {
     const {
       classes,
       data: { loading, cats },
+      site,
     } = this.props;
     const { catActive } = this.state;
 
@@ -61,7 +63,12 @@ class CatListContainer extends React.Component {
               {cat.productType.map(type => (
                 <Collapse key={type.name} in={catActive === cat.id} timeout="auto" unmountOnExit>
                   <List component="div">
-                    <ListItem button className={classes.nestedCat}>
+                    <ListItem
+                      button
+                      className={classes.nestedCat}
+                      component={Link}
+                      to={`${site.slug.value}/equipment/${cat.slug.value}/${type.slug.value}`}
+                    >
                       <ListItemText primary={type.name} />
                     </ListItem>
                   </List>
@@ -80,16 +87,22 @@ const catsQuery = gql`
     cats(id: $id) {
       id
       name
+      slug {
+        value
+      }
       productType {
         id
         name
+        slug {
+          value
+        }
       }
     }
   }
 `;
 
 const CatListData = graphql(catsQuery, {
-  options: props => ({ variables: { id: props.siteId } }),
+  options: props => ({ variables: { id: props.site.id } }),
 })(CatListContainer);
 
 export default withStyles(styles)(CatListData);
